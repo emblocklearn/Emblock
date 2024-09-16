@@ -1,0 +1,32 @@
+<script>
+  async function saveInvoiceData() {
+    const invoiceData = {
+      name: "Name", // replace with the actual name
+      invoiceNumber: "XXXXXXXXXX",
+      email: "abcd@gmail.com",
+      orderDate: "March 01, 2024",
+      orderId: "XXXXXXXXXX",
+      source: "Emblock Learn",
+      items: [
+        {
+          description: "Internship",
+          name: "UI/UX Design",
+          price: 1180
+        }
+      ],
+      totalAmount: 1180,
+      currency: "INR"
+    };
+
+    try {
+      // Add a new document with a generated ID
+      await db.collection("invoices").add(invoiceData);
+      console.log("Invoice saved successfully!");
+    } catch (error) {
+      console.error("Error saving invoice: ", error);
+    }
+  }
+
+  // Call the function to save the invoice data when the page loads
+  saveInvoiceData();
+</script>
