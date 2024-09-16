@@ -195,7 +195,7 @@ const Checkout = () => {
     }
 
     try {
-      const data = await fetch('http://localhost:5000/create-order', {
+      const data = await fetch('https://emblocklearn.vercel.app/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -219,7 +219,7 @@ const Checkout = () => {
         order_id: jsonData.order.id,
         handler: async function (response) {
           try {
-            const verifyResponse = await fetch('http://localhost:5000/verify-payment', {
+            const verifyResponse = await fetch('https://emblocklearn.vercel.app/verify-payment', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({

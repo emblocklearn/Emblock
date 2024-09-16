@@ -5,7 +5,19 @@ const cors = require('cors');
 
 const app = express(); 
 app.use(express.json());
-app.use(cors())
+const allowedOrigins = ['https://project-emblock.web.app', 'http://localhost:3000'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 const razorpay = new Razorpay({
   key_id: 'rzp_test_7B8acwKj7CrvtI',
   key_secret: '8OqR4nPJQrxTLkWh2VzjZVAA',
