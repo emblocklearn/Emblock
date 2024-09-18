@@ -84,7 +84,7 @@ const Footer = () => {
             >
               Close
             </button>
-            <div className="bg-white border border-4 border-green-500 text-black px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2 ">
+            <div className="mx-4 bg-white border border-4 border-green-500 text-black px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2 ">
 
               <h2 className="text-[12px] text-center font-semibold">Terms & Conditions</h2>
               <div className=" font-semibold mb-4" >
@@ -128,7 +128,7 @@ const Footer = () => {
             >
               Close
             </button>
-            <div className="bg-white border border-4 border-green-500 text-black px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
+            <div className="mx-4 bg-white border border-4 border-green-500 text-black px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
               <h2 className="text-lg text-center font-semibold mb-4">Return Policy</h2>
               <div className=" font-semibold mb-4">
                 <ul className="list-disc pl-5 flex flex-col items-start">
@@ -165,7 +165,7 @@ const Footer = () => {
             >
               Close
             </button>
-            <div className="bg-white text-black  border border-4 border-green-500 rounded-lg shadow-lg px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
+            <div className="mx-4 bg-white text-black  border border-4 border-green-500 rounded-lg shadow-lg px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
               <h2 className="text-lg text-center font-semibold mb-4">Cancellation and Refund Policy</h2>
               <div className="text-black font-semibold mb-4 flex flex-col items-start">
                 <ul className="list-disc pl-5">

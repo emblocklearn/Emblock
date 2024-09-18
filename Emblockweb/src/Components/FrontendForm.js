@@ -112,7 +112,7 @@ const FrontendForm = () => {
         }}
       >
         <button
-          className="absolute top-4 md:left-[-7px] bg-green-500 text-white p-2 rounded-full flex text-black items-center hover:bg-green-600"
+          className="absolute top-4 -ml-6 -mt-6  md:left-[-7px] bg-green-500 text-white p-2 rounded-full flex text-black items-center hover:bg-green-600"
           onClick={handleBackClick}
           style={{ left: "35px", top: "30px", transform: "translateX(-50%)" }} // Center the button horizontally
         >

@@ -200,7 +200,7 @@ const Checkout = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount: 1000 }),
+        body: JSON.stringify({ amount: 1180 }),
       });
 
       if (!data.ok) {
@@ -215,7 +215,7 @@ const Checkout = () => {
         currency: jsonData.order.currency,
         name: 'Emblock Learn',
         description: 'Test Transaction',
-        image: 'https://yourcompany.com/logo.png',
+        image: 'https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/emblocklogo.png?alt=media&token=b594cf44-bce5-449a-86ca-a8e5e15425d8',
         order_id: jsonData.order.id,
         handler: async function (response) {
           try {
@@ -346,7 +346,7 @@ const Checkout = () => {
             <div className="relative flex flex-col items-end mt-4 md:mt-0 md:pl-6">
               <div className="absolute left-0 top-0 h-full w-0.5 bg-dashed bg-gray-400 hidden md:block"></div>
               <p className="text-lg md:text-xl font-semibold">Total Price<i className="fas fa-chevron-down text-sm md:text-base p-1"></i></p>
-              <p className="text-xl md:text-3xl font-bold mr-[32px]">₹1000</p>
+              <p className="text-xl md:text-3xl font-bold mr-[32px]">₹1180</p>
             </div>
           </div>
           <div>
@@ -366,7 +366,7 @@ const Checkout = () => {
                 >
                   Close
                 </button>
-                <div className="bg-white border border-4 border-green-500 text-black px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
+                <div className="mx-4 bg-white border border-4 border-green-500 text-black px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
                 
                   
 
