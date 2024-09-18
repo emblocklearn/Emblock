@@ -141,7 +141,7 @@ const Checkout = () => {
       element.innerHTML = invoiceHtml;
 
       const pdfBlob = await html2pdf().from(element).outputPdf('blob');
-      const pdfRef = ref(storage, `invoices/${email + response.razorpay_order_id}.pdf`);
+      const pdfRef = ref(`storage, invoices/${email + response.razorpay_order_id}.pdf`);
       await uploadBytes(pdfRef, pdfBlob);
       const pdfUrl = await getDownloadURL(pdfRef);
 
@@ -304,7 +304,7 @@ const Checkout = () => {
         <div className="w-16 h-16 border-4 border-t-4 border-green-500 border-solid rounded-full animate-spin"></div>
       </div>
       <div className="max-w-full md:max-w-6xl mx-auto bg-white text-black shadow-lg rounded-lg overflow-hidden">
-        <div className="flex flex-row md:flex-row items-center justify-between p-4 md:p-6 border-b border-gray-200">
+        <div className="flex flex-row md:flex-row items-center justify-between p-[10px] md:p-6 border-b border-gray-200">
           <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Checkout</h1>
           <button
             onClick={handleCloseClick}
@@ -319,7 +319,7 @@ const Checkout = () => {
             <img
               src={embeddedSystemsImage}
               alt="Embedded Systems"
-              className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
+              className="w-[14rem] h-[10rem] md:w-32 md:h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
             />
             <div className="flex-1">
               <h3 className="text-xl md:text-2xl font-bold mb-4">This internship includes</h3>

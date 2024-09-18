@@ -4,11 +4,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import bground from '../assets/formbg.png';
 import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
 
 const FrontendForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { title } = location.state || {}; // Access the title from the state
+  const { title } = location.state || {};
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -29,15 +31,7 @@ const FrontendForm = () => {
     languages: '',
     careerGoal: '',
     internship: '',
-    referral: '',
-    paymentDetails: [
-      {
-        orderId: '',
-        paymentStatus: false,
-        invoiceId: '',
-        invoiceUrl  : '',
-      }
-    ]
+    referral: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -53,7 +47,6 @@ const FrontendForm = () => {
       [name]: value
     });
 
-    // Validate fields (you can add more validations as needed)
     if (name === "Department" && !value) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -75,43 +68,40 @@ const FrontendForm = () => {
   const handleProceedClick = async () => {
     const newErrors = {};
   
-    // Check if any field is empty and set errors
+    // Check for empty fields
     for (let key in formData) {
       if (!formData[key]) {
-        newErrors[key] = `Please fill the ${key} field.`;
+        newErrors[key] =` Please fill the ${key} field.`;
       }
     }
   
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors); // Set errors if any fields are empty
-      alert("Please fill all the required fields.");
+      setErrors(newErrors);
+      toast.error('Please fill all the required fields.');
       return;
     }
   
     try {
-      // Create a new document in Firestore
-      const docRef = doc(db, "Users", formData.email);
-      await setDoc(docRef, {
+      await setDoc(doc(db, "Users", formData.email), {
         ...formData,
         course: title || 'Unknown Course',
         timestamp: new Date(),
       });
   
-      // Retrieve the document ID
-      const docId = docRef.id;
-  
-      // Navigate to checkout page with user data and document ID
-      navigate('/checkout', { state: { name: formData.fullName, email: formData.email, title: title, docId: docId } });
+      // Show toast on successful submission
+      toast.success('Form submitted successfully!');
+      navigate('/checkout');
     } catch (error) {
       console.error('Error storing form data:', error);
-      alert('Failed to submit form');
+      toast.error('Failed to submit form.');
     }
   };
   
 
-
   return (
     <div className="min-h-screen flex justify-center items-center bg-white relative">
+      <ToastContainer /> {/* Toast Container for showing toasts */}
+      
       <div
         className="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 max-w-4xl relative z-10"
         style={{
@@ -136,8 +126,8 @@ const FrontendForm = () => {
             <h2 className="font-semibold text-green-500 text-xl">Personal Information</h2>
           </div>
 
-          <div className="grid grid-cols-3 gap-6">
-            <div>
+          <div className="flex flex-col md:grid md:grid-cols-3 gap-6">
+            <div className="w-full">
               <label className="block text-sm font-medium">Full Name</label>
               <input
                 type="text"
@@ -149,7 +139,7 @@ const FrontendForm = () => {
               {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-sm font-medium">Contact Number</label>
               <input
                 type="text"
@@ -161,7 +151,7 @@ const FrontendForm = () => {
               {errors.contactNumber && <p className="text-red-500 text-sm">{errors.contactNumber}</p>}
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-sm font-medium">Email</label>
               <input
                 type="email"
@@ -174,8 +164,8 @@ const FrontendForm = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-6">
-            <div>
+          <div className="flex flex-col md:grid md:grid-cols-3 gap-6">
+            <div className="w-full">
               <label className="block text-sm font-medium">House No./Block No.</label>
               <input
                 type="text"
@@ -187,7 +177,7 @@ const FrontendForm = () => {
               {errors.houseNo && <p className="text-red-500 text-sm">{errors.houseNo}</p>}
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-sm font-medium">Street Name</label>
               <input
                 type="text"
@@ -199,7 +189,7 @@ const FrontendForm = () => {
               {errors.streetName && <p className="text-red-500 text-sm">{errors.streetName}</p>}
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-sm font-medium">Pincode</label>
               <input
                 type="text"
@@ -211,19 +201,17 @@ const FrontendForm = () => {
               {errors.pincode && <p className="text-red-500 text-sm">{errors.pincode}</p>}
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-sm font-medium">State</label>
               <select
                 name="state"
                 value={formData.state}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-                aria-placeholder="States"
               >
                 <option value="" disabled selected hidden>
     Select a State
   </option>
-                
                 <option>Andhra Pradesh</option>
 <option>Arunachal Pradesh</option>
 <option>Assam</option>
@@ -252,25 +240,21 @@ const FrontendForm = () => {
 <option>Uttar Pradesh</option>
 <option>Uttarakhand</option>
 <option>West Bengal</option>
-
-
               </select>
               {errors.state && <p className="text-red-500 text-sm">{errors.state}</p>}
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-sm font-medium">District</label>
               <select
                 name="district"
                 value={formData.district}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-                placeholder="District"
               >
                 <option value="" disabled selected hidden>
     Select a District
   </option>
-                
                 <option>Ariyalur</option>
 <option>Chengalpattu</option>
 <option>Chennai</option>
@@ -308,18 +292,17 @@ const FrontendForm = () => {
 <option>Vellore</option>
 <option>Viluppuram</option>
 <option>Virudhunagar</option>
-
               </select>
               {errors.district && <p className="text-red-500 text-sm">{errors.district}</p>}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 mt-8">
+          <div className="flex flex-col md:grid md:grid-cols-2 gap-6 mt-8">
             <div className="col-span-2">
               <h2 className="font-semibold text-green-500 text-xl">Education</h2>
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-sm font-medium">College</label>
               <input
                 type="text"
@@ -434,85 +417,80 @@ const FrontendForm = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 mt-8">
-            <div className="col-span-2">
-              <h2 className="font-semibold text-green-500 text-xl">Additional Information</h2>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div className="w-full">
+    <label className="block text-sm font-medium">Languages/Softwares Known</label>
+    <input
+      type="text"
+      name="languages"
+      value={formData.languages}
+      onChange={handleChange}
+      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+    />
+    {errors.languages && <p className="text-red-500 text-sm">{errors.languages}</p>}
+  </div>
 
-            <div>
-              <label className="block text-sm font-medium">Languages/Softwares Known</label>
-              <input
-                type="text"
-                name="languages"
-                value={formData.languages}
-                onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-              />
-              {errors.languages && <p className="text-red-500 text-sm">{errors.languages}</p>}
-            </div>
+  <div className="w-full">
+    <label className="block text-sm font-medium">Career Goal</label>
+    <input
+      type="text"
+      name="careerGoal"
+      value={formData.careerGoal}
+      onChange={handleChange}
+      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+    />
+    {errors.careerGoal && <p className="text-red-500 text-sm">{errors.careerGoal}</p>}
+  </div>
 
-            <div>
-              <label className="block text-sm font-medium">Career Goal</label>
-              <input
-                type="text"
-                name="careerGoal"
-                value={formData.careerGoal}
-                onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-              />
-              {errors.careerGoal && <p className="text-red-500 text-sm">{errors.careerGoal}</p>}
-            </div>
+  <div className="w-full">
+    <label className="block text-sm font-medium">Internships (If Any)</label>
+    <input
+      type="text"
+      name="internship"
+      value={formData.internship}
+      onChange={handleChange}
+      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+    />
+    {errors.internship && <p className="text-red-500 text-sm">{errors.internship}</p>}
+  </div>
 
-            <div>
-              <label className="block text-sm font-medium">Internships (If Any)</label>
-              <input
-                type="text"
-                name="internship"
-                value={formData.internship}
-                onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-              />
-              {errors.internship && <p className="text-red-500 text-sm">{errors.internship}</p>}
-            </div>
+  <div className="w-full">
+    <label className="block text-sm font-medium">How Did You Hear About Us?</label>
+    <select
+      name="referral"
+      value={formData.referral}
+      onChange={handleChange}
+      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+    >
+      <option value="" disabled selected hidden>Select an option</option>
+      <option>Google Search</option>
+      <option>Social Media (Facebook, Instagram, etc.)</option>
+      <option>Friends or Family</option>
+      <option>Online Ads</option>
+      <option>Television</option>
+      <option>Radio</option>
+      <option>Newspaper or Magazine</option>
+      <option>Event or Conference</option>
+      <option>Word of Mouth</option>
+      <option>Email Newsletter</option>
+      <option>Billboard</option>
+      <option>Referral from a Partner</option>
+      <option>Blog or Website</option>
+      <option>YouTube</option>
+      <option>Other</option>
+    </select>
+    {errors.referral && <p className="text-red-500 text-sm">{errors.referral}</p>}
+  </div>
+</div>
 
-            <div>
-              <label className="block text-sm font-medium">How Did You Hear About Us?</label>
-              <select
-                name="referral"
-                value={formData.referral}
-                onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-              >
-                <option value="" disabled selected hidden>
-    Select a option
-  </option>
-  <option value="" disabled selected hidden>How Did You Hear About Us?</option>
-<option>Google Search</option>
-<option>Social Media (Facebook, Instagram, etc.)</option>
-<option>Friends or Family</option>
-<option>Online Ads</option>
-<option>Television</option>
-<option>Radio</option>
-<option>Newspaper or Magazine</option>
-<option>Event or Conference</option>
-<option>Word of Mouth</option>
-<option>Email Newsletter</option>
-<option>Billboard</option>
-<option>Referral from a Partner</option>
-<option>Blog or Website</option>
-<option>YouTube</option>
-<option>Other</option>
 
-              </select>
-              {errors.referral && <p className="text-red-500 text-sm">{errors.referral}</p>}
-            </div>
-          </div>
-
-          <div className="flex justify-center mt-8">
+          
+          
+          <div className="mt-6 flex justify-center">
             <button
               type="button"
-              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 w-1/4 text-center"
               onClick={handleProceedClick}
+              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
             >
               Proceed
             </button>

@@ -14,17 +14,17 @@ const Footer = () => {
     setOpenModal(null);
   };
   return (
-    <footer className="bg-black text-white pt-14  px-16 md:px-8">
+    <footer className="bg-black text-white pt-14  px-8 md:px-16">
       <div className="flex flex-col md:flex-row justify-between items-center">
 
         {/* Logo and Title Section */}
-        <div className="flex flex-col md:flex-col items-start  mb-6 md:mb-0">
+        <div className="flex flex-col md:flex-col items-center md:items-start  mb-6 md:mb-0">
           <div className="flex items-center mb-4 md:mb-0">
             <img src={logo} alt="Emblock Logo" className="h-12 w-12" />
             <h2 className="text-xl font-bold ml-4">Emblock</h2>
           </div>
           <div>
-            <p className="text-center md:text-left">
+            <p className="text-center md:text-left text-[15px]">
               Welcome to EMBLOCK – your catalyst for business transformation. We fuse technology,<br />
               innovation, and expertise to drive your success.
             </p>
@@ -48,8 +48,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4 flex flex-col items-center gap-2 ">
-        <p className='text-center '>© Copyright EMBLOCK. All Rights Reserved</p>
+      <div className="mt-10 flex flex-col items-center gap-2 text-[12px] md:text-[15px] ">
+        <p className='text-center  '>© Copyright EMBLOCK. All Rights Reserved</p>
 
 
         <div className="flex items-center gap-4 pb-6">
@@ -86,7 +86,7 @@ const Footer = () => {
             </button>
             <div className="bg-white border border-4 border-green-500 text-black px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2 ">
 
-              <h2 className="text-lg text-center font-semibold">Terms & Conditions</h2>
+              <h2 className="text-[12px] text-center font-semibold">Terms & Conditions</h2>
               <div className=" font-semibold mb-4" >
                 <ul className="list-disc pl-5 flex flex-col items-start" >
                   <li>This document is an electronic record in terms of the Information Technology Act, 2000 and relevant amendments. It does not require physical or digital signatures.</li>

@@ -34,7 +34,7 @@ const Carousel = () => {
     return (
         <div className="flex flex-col bg-white items-center ">
             {/* Title */}
-            <h1 className="text-4xl text-black font-bold mb-4 relative md :left-[-550px] ">
+            <h1 className=" mt-6  text-[28px] md:text-[40px] text-black font-bold mb-4 relative md :left-[-550px] ">
                 Words of <span className="text-green-500 italic">Wisdom !!</span>
             </h1>
 
@@ -49,7 +49,7 @@ const Carousel = () => {
                     <img
                         src={quotes[currentIndex].text}
                         alt="Quote Text"
-                        className="w-full h-auto"
+                        className="w-full h-[100px] md:h-auto "
                     />
                 </div>
 
@@ -62,7 +62,7 @@ const Carousel = () => {
                     <button
                         key={index}
                         onClick={() => handleCircleClick(index)}
-                        className={`h-4 w-4 rounded-full  ${currentIndex === index ? 'bg-green-500' : 'bg-gray-300'
+                        className={`h-2 w-2 md:h-3 md:w-3 rounded-full  ${currentIndex === index ? 'bg-green-500' : 'bg-gray-300'
                             }`}
                     />
                 ))}

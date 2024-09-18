@@ -93,8 +93,8 @@ const OfferSection = ({ offerItems = [] }) => {
         </div>
       )}
 
-      <div className={`py-14 px-8 lg:px-16 bg-white ${showUiUxDesign ? 'blur-sm' : ''}`}>
-        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 lg:mb-12 text-center">
+      <div className={`pt-10 px-6 md:px-16 bg-white ${showUiUxDesign ? 'blur-sm' : ''}`}>
+        <h2 className="text-[24px] md:text-[40px] font-bold text-gray-900 mb-8 lg:mb-12 text-center">
           What we offer?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -122,7 +122,7 @@ const OfferSection = ({ offerItems = [] }) => {
                     <FaArrowRight style={{ color: 'black' }} />
                   </button>
                 </div>
-                <p className="mt-4 text-base lg:text-lg font-semibold text-gray-800 transition-transform duration-300 ease-in-out group-hover:hidden">
+                <p className="mt-4 text-[17px] md:text-[20px] font-semibold text-gray-800 transition-transform duration-300 ease-in-out group-hover:hidden">
                   {item.title}
                 </p>
               </div>
