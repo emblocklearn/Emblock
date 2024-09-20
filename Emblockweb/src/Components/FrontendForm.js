@@ -4,13 +4,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import bground from '../assets/formbg.png';
 import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
+import { toast, ToastContainer } from 'react-toastify';
 
 const FrontendForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { title } = location.state || {};
+  const { title } = location.state || {}; // Access the title from the state
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -31,7 +30,15 @@ const FrontendForm = () => {
     languages: '',
     careerGoal: '',
     internship: '',
-    referral: ''
+    referral: '',
+    paymentDetails: [
+      {
+        orderId: '',
+        paymentStatus: false,
+        invoiceId: '',
+        invoiceUrl  : '',
+      }
+    ]
   });
 
   const [errors, setErrors] = useState({});
@@ -47,6 +54,7 @@ const FrontendForm = () => {
       [name]: value
     });
 
+    // Validate fields (you can add more validations as needed)
     if (name === "Department" && !value) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -68,39 +76,45 @@ const FrontendForm = () => {
   const handleProceedClick = async () => {
     const newErrors = {};
   
-    // Check for empty fields
+    // Check if any field is empty and set errors
     for (let key in formData) {
       if (!formData[key]) {
-        newErrors[key] =` Please fill the ${key} field.`;
+        newErrors[key] = `Please fill the ${key} field.`;
       }
     }
   
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      toast.error('Please fill all the required fields.');
+      setErrors(newErrors); // Set errors if any fields are empty
+      alert("Please fill all the required fields.");
       return;
     }
   
     try {
-      await setDoc(doc(db, "Users", formData.email), {
+      // Create a new document in Firestore
+      const docRef = doc(db, "Users", formData.email);
+      await setDoc(docRef, {
         ...formData,
         course: title || 'Unknown Course',
         timestamp: new Date(),
       });
   
-      // Show toast on successful submission
-      toast.success('Form submitted successfully!');
-      navigate('/checkout');
+      // Retrieve the document ID
+      const docId = docRef.id;
+  
+      // Navigate to checkout page with user data and document ID
+      navigate('/checkout', { state: { name: formData.fullName, email: formData.email, title: title, docId: docId } });
+      toast.success('Form submitted successfully');
     } catch (error) {
       console.error('Error storing form data:', error);
-      toast.error('Failed to submit form.');
+      toast.error('Failed to submit form');
+      alert('Failed to submit form');
     }
   };
   
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white relative">
-      <ToastContainer /> {/* Toast Container for showing toasts */}
+      <ToastContainer /> 
       
       <div
         className="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 max-w-4xl relative z-10"

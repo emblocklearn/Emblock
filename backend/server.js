@@ -60,7 +60,7 @@ app.post('/verify-payment', (req, res) => {
   }
 
   const body = order_id + "|" + razorpay_payment_id;
-  const secret = '8OqR4nPJQrxTLkWh2VzjZVAA'; // Use the correct secret from Razorpay Dashboard
+  const secret = process.env.RAZORPAY_KEY_SECRET;
   const expectedSignature = crypto
     .createHmac('sha256', secret)
     .update(body)

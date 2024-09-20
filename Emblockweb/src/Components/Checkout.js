@@ -7,13 +7,14 @@ import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db } from './firebase'; // Import storage and db
 
+
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [openModal, setOpenModal] = useState(null);
-  const { name, email, title, docId } = location.state || {}; // Get name and email from state
+  const { name, email, title, docId } = location.state || {}; 
   console.log("name", name, email, title, docId);
 
   const handleCloseClick = () => {
@@ -141,7 +142,7 @@ const Checkout = () => {
       element.innerHTML = invoiceHtml;
 
       const pdfBlob = await html2pdf().from(element).outputPdf('blob');
-      const pdfRef = ref(`storage, invoices/${email + response.razorpay_order_id}.pdf`);
+      const pdfRef = ref(storage, `invoices/${email + response.razorpay_order_id}.pdf`);
       await uploadBytes(pdfRef, pdfBlob);
       const pdfUrl = await getDownloadURL(pdfRef);
 
@@ -200,7 +201,7 @@ const Checkout = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount: 1180 }),
+        body: JSON.stringify({ amount: 1 }),
       });
 
       if (!data.ok) {
@@ -210,7 +211,8 @@ const Checkout = () => {
       const jsonData = await data.json();
 
       const options = {
-        key: 'rzp_test_7B8acwKj7CrvtI',
+        // use env variable for key
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
         amount: jsonData.order.amount,
         currency: jsonData.order.currency,
         name: 'Emblock Learn',
@@ -218,6 +220,7 @@ const Checkout = () => {
         image: 'https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/emblocklogo.png?alt=media&token=b594cf44-bce5-449a-86ca-a8e5e15425d8',
         order_id: jsonData.order.id,
         handler: async function (response) {
+          console.log(response); 
           try {
             const verifyResponse = await fetch('https://emblocklearn.vercel.app/verify-payment', {
               method: 'POST',
