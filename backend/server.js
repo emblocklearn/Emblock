@@ -2,10 +2,11 @@ const express = require('express');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express(); 
 app.use(express.json());
-const allowedOrigins = ['https://project-emblock.web.app', 'http://localhost:3000'];
+const allowedOrigins = ['https://project-emblock.web.app', 'http://localhost:3000', 'https://workshopemblock.emblock.in'];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -18,9 +19,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+
+
 const razorpay = new Razorpay({
-  key_id: 'rzp_test_7B8acwKj7CrvtI',
-  key_secret: '8OqR4nPJQrxTLkWh2VzjZVAA',
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 app.post('/create-order', async (req, res) => {

@@ -370,36 +370,59 @@ const Checkout = () => {
                 
                   
 
-                    <h2 className="text-lg text-center font-semibold">Terms & Conditions</h2>
-                    <div className=" font-semibold mb-4" >
-                      <ul className="list-disc pl-5 flex flex-col items-start" >
-                        <li>This document is an electronic record in terms of the Information Technology Act, 2000 and relevant amendments. It does not require physical or digital signatures.</li>
-                        <li>Published in accordance with Rule 3(1) of the Information Technology (Intermediaries Guidelines) Rules, 2011, which requires publishing the rules and regulations, privacy policy, and Terms of Use for the domain [Enter domain name] (“Website”), including mobile site and mobile application (“Platform”).</li>
-                        <li>The Platform is owned by [Enter name of the company], with its registered office at [Enter Address] (referred to as "Platform Owner", “we”, “us”, “our”).</li>
-                        <li>Your use of the Platform and its services are governed by the following terms and conditions ("Terms of Use"), including applicable policies. By using the Platform, you contract with the Platform Owner, and these terms constitute your binding obligations.</li>
-                        <li>These Terms of Use relate to your use of our website, goods, or services (collectively, “Services”). Any terms proposed by you that conflict with these Terms are expressly rejected.</li>
-                        <li>These Terms can be modified at any time without notice. It is your responsibility to periodically review them to stay informed of updates.</li>
-                        <li>"You", "your", or "user" refers to any natural or legal person who has agreed to use the Platform.</li>
-                        <li>ACCESSING, BROWSING, OR USING THE PLATFORM INDICATES YOUR AGREEMENT TO THESE TERMS, SO PLEASE READ CAREFULLY BEFORE PROCEEDING.</li>
-                        <li>You agree to provide accurate information during registration and are responsible for all actions done through your registered account on the Platform.</li>
-                        <li>Neither we nor any third parties provide warranties or guarantees regarding the accuracy, timeliness, or completeness of the information and materials on the Platform.</li>
-                        <li>Your use of the Services is at your own risk, and we shall not be liable for any consequences.</li>
-                        <li>The contents of the Platform and Services are proprietary to us. You do not hold any intellectual property rights to the content.</li>
-                        <li>Unauthorized use of the Platform and/or Services may result in action against you as per these Terms or applicable laws.</li>
-                        <li>You agree to pay for the Services and not use the Platform for any unlawful or illegal purposes.</li>
-                        <li>Our Platform may contain links to third-party websites. When accessing these, you are governed by the terms and policies of those websites.</li>
-                        <li>When initiating a transaction on the Platform, you are entering into a legally binding contract with the Platform Owner.</li>
-                        <li>You agree to indemnify and hold the Platform Owner harmless from any third-party claims due to your breach of these Terms.</li>
-                        <li>The Platform Owner will not be liable for any indirect, consequential, or punitive damages arising from your use of the Services.</li>
-                        <li>Liability will not exceed the amount paid by you for using the Services or Rs. 100, whichever is less.</li>
-                        <li>Performance of obligations may be delayed or prevented by a force majeure event.</li>
-                        <li>These Terms are governed by the laws of India, and disputes will be subject to the jurisdiction of courts in [Enter City and State].</li>
-                        <li>Concerns regarding these Terms must be communicated using the contact information provided on the website.</li>
-                      </ul>
-                    </div>
+                <h1 className="text-[12px] text-center font-extrabold">Terms and Conditions for EmBlock Workshop</h1>
+              <div className="mb-4" >
+              <p class="notice"><strong>This document is an electronic record in terms of the Information Technology Act, 2000 and relevant amendments. It does not require physical or digital signatures.</strong></p>
+                <ul className="list-disc pl-5 flex flex-col items-start" >
+
+              
+
+                
+
+                  <li><strong>Published in accordance with Rule 3(1) of the Information Technology (Intermediaries Guidelines) Rules, 2011, which requires publishing the rules and regulations, privacy policy, and Terms of Use for the domain emblock.in ("Website"), including mobile site and mobile application ("Platform").</strong></li>
+
+                  <li><strong>The Platform is owned by EmBlock, with its registered office at [23 a ramadoss salai nehru nagar neveli Cuddalore-607308] (referred to as "EmBlock", "we", "us", "our").</strong></li>
+
+                  <li><strong>Your use of the Platform and its services, including the workshop, are governed by the following terms and conditions ("Terms of Use"). By using the Platform or registering for the workshop, you contract with EmBlock, and these terms constitute your binding obligations.</strong></li>
+
+                  <li class="highlight"><strong>The workshop fee is 1000 INR and is strictly non-refundable. No cancellations are allowed under any circumstances. By registering for the workshop, you acknowledge and agree to this no-refund, no-cancellation policy.</strong></li>
+
+                  <li><strong>These Terms of Use relate to your use of our website and workshop services (collectively, "Services"). Any terms proposed by you that conflict with these Terms are expressly rejected.</strong></li>
+
+                  <li><strong>These Terms can be modified at any time without notice. It is your responsibility to periodically review them to stay informed of updates.</strong></li>
+
+                  <li><strong>"You", "your", or "user" refers to any natural or legal person who has agreed to use the Platform or register for the workshop.</strong></li>
+
+                  <li><strong>ACCESSING, BROWSING, OR USING THE PLATFORM, OR REGISTERING FOR THE WORKSHOP INDICATES YOUR AGREEMENT TO THESE TERMS, SO PLEASE READ CAREFULLY BEFORE PROCEEDING.</strong></li>
+
+                  <li><strong>You agree to provide accurate information during registration and are responsible for all actions done through your registered account on the Platform.</strong></li>
+
+                  <li><strong>Your use of the Services is at your own risk, and we shall not be liable for any consequences.</strong></li>
+
+                  <li><strong>The contents of the Platform, Services, and workshop materials are proprietary to EmBlock. You do not hold any intellectual property rights to the content.</strong></li>
+
+                  <li><strong>Unauthorized use of the Platform, Services, or workshop materials may result in action against you as per these Terms or applicable laws.</strong></li>
+
+                  <li><strong>You agree to pay for the workshop and not use the Platform for any unlawful or illegal purposes.</strong></li>
+
+                  <li><strong>When registering for the workshop on the Platform, you are entering into a legally binding contract with EmBlock.</strong></li>
+
+                  <li><strong>You agree to indemnify and hold EmBlock harmless from any third-party claims due to your breach of these Terms.</strong></li>
+
+                  <li><strong>EmBlock will not be liable for any indirect, consequential, or punitive damages arising from your use of the Services or participation in the workshop.</strong></li>
+
+                  <li><strong>Liability will not exceed the amount paid by you for the workshop or Rs. 100, whichever is less.</strong></li>
+
+                  <li><strong>Performance of obligations may be delayed or prevented by a force majeure event.</strong></li>
+
+                  <li><strong>These Terms are governed by the laws of India, and disputes will be subject to the jurisdiction of courts in [Cuddalore, TamilNadu].</strong></li>
+
+                  <li><strong>Concerns regarding these Terms must be communicated using the contact information provided on the website.</strong></li>
+
+                </ul>
+              </div>
 
 
-                  
                   <div className="flex items-center mt-4">
                     <input
                       type="checkbox"

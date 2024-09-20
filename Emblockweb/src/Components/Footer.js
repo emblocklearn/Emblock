@@ -62,16 +62,9 @@ const Footer = () => {
           </button>
           <button
             className="text-green-500 hover:text-green-600"
-            onClick={() => handleOpenModal("return")}
+            onClick={() => handleOpenModal("privacy")}
           >
-            Return Policy
-          </button>
-          <button
-
-            className="text-green-500 hover:text-green-600"
-            onClick={() => handleOpenModal("refund")}
-          >
-            Cancellation and Refund Policy
+            Privacy Policy
           </button>
         </div>
 
@@ -86,31 +79,55 @@ const Footer = () => {
             </button>
             <div className="mx-4 bg-white border border-4 border-green-500 text-black px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2 ">
 
-              <h2 className="text-[12px] text-center font-semibold">Terms & Conditions</h2>
-              <div className=" font-semibold mb-4" >
+              <h1 className="text-[12px] text-center font-extrabold">Terms and Conditions for EmBlock Workshop</h1>
+              <div className="mb-4" >
+                <p class="notice"><strong>This document is an electronic record in terms of the Information Technology Act, 2000 and relevant amendments. It does not require physical or digital signatures.</strong></p>
                 <ul className="list-disc pl-5 flex flex-col items-start" >
-                  <li>This document is an electronic record in terms of the Information Technology Act, 2000 and relevant amendments. It does not require physical or digital signatures.</li>
-                  <li>Published in accordance with Rule 3(1) of the Information Technology (Intermediaries Guidelines) Rules, 2011, which requires publishing the rules and regulations, privacy policy, and Terms of Use for the domain [Enter domain name] (“Website”), including mobile site and mobile application (“Platform”).</li>
-                  <li>The Platform is owned by [Enter name of the company], with its registered office at [Enter Address] (referred to as "Platform Owner", “we”, “us”, “our”).</li>
-                  <li>Your use of the Platform and its services are governed by the following terms and conditions ("Terms of Use"), including applicable policies. By using the Platform, you contract with the Platform Owner, and these terms constitute your binding obligations.</li>
-                  <li>These Terms of Use relate to your use of our website, goods, or services (collectively, “Services”). Any terms proposed by you that conflict with these Terms are expressly rejected.</li>
-                  <li>These Terms can be modified at any time without notice. It is your responsibility to periodically review them to stay informed of updates.</li>
-                  <li>"You", "your", or "user" refers to any natural or legal person who has agreed to use the Platform.</li>
-                  <li>ACCESSING, BROWSING, OR USING THE PLATFORM INDICATES YOUR AGREEMENT TO THESE TERMS, SO PLEASE READ CAREFULLY BEFORE PROCEEDING.</li>
-                  <li>You agree to provide accurate information during registration and are responsible for all actions done through your registered account on the Platform.</li>
-                  <li>Neither we nor any third parties provide warranties or guarantees regarding the accuracy, timeliness, or completeness of the information and materials on the Platform.</li>
-                  <li>Your use of the Services is at your own risk, and we shall not be liable for any consequences.</li>
-                  <li>The contents of the Platform and Services are proprietary to us. You do not hold any intellectual property rights to the content.</li>
-                  <li>Unauthorized use of the Platform and/or Services may result in action against you as per these Terms or applicable laws.</li>
-                  <li>You agree to pay for the Services and not use the Platform for any unlawful or illegal purposes.</li>
-                  <li>Our Platform may contain links to third-party websites. When accessing these, you are governed by the terms and policies of those websites.</li>
-                  <li>When initiating a transaction on the Platform, you are entering into a legally binding contract with the Platform Owner.</li>
-                  <li>You agree to indemnify and hold the Platform Owner harmless from any third-party claims due to your breach of these Terms.</li>
-                  <li>The Platform Owner will not be liable for any indirect, consequential, or punitive damages arising from your use of the Services.</li>
-                  <li>Liability will not exceed the amount paid by you for using the Services or Rs. 100, whichever is less.</li>
-                  <li>Performance of obligations may be delayed or prevented by a force majeure event.</li>
-                  <li>These Terms are governed by the laws of India, and disputes will be subject to the jurisdiction of courts in [Enter City and State].</li>
-                  <li>Concerns regarding these Terms must be communicated using the contact information provided on the website.</li>
+
+
+
+
+
+                  <li><strong>Published in accordance with Rule 3(1) of the Information Technology (Intermediaries Guidelines) Rules, 2011, which requires publishing the rules and regulations, privacy policy, and Terms of Use for the domain emblock.in ("Website"), including mobile site and mobile application ("Platform").</strong></li>
+
+                  <li><strong>The Platform is owned by EmBlock, with its registered office at [23 a ramadoss salai nehru nagar neveli Cuddalore-607308] (referred to as "EmBlock", "we", "us", "our").</strong></li>
+
+                  <li><strong>Your use of the Platform and its services, including the workshop, are governed by the following terms and conditions ("Terms of Use"). By using the Platform or registering for the workshop, you contract with EmBlock, and these terms constitute your binding obligations.</strong></li>
+
+                  <li class="highlight"><strong>The workshop fee is 1000 INR and is strictly non-refundable. No cancellations are allowed under any circumstances. By registering for the workshop, you acknowledge and agree to this no-refund, no-cancellation policy.</strong></li>
+
+                  <li><strong>These Terms of Use relate to your use of our website and workshop services (collectively, "Services"). Any terms proposed by you that conflict with these Terms are expressly rejected.</strong></li>
+
+                  <li><strong>These Terms can be modified at any time without notice. It is your responsibility to periodically review them to stay informed of updates.</strong></li>
+
+                  <li><strong>"You", "your", or "user" refers to any natural or legal person who has agreed to use the Platform or register for the workshop.</strong></li>
+
+                  <li><strong>ACCESSING, BROWSING, OR USING THE PLATFORM, OR REGISTERING FOR THE WORKSHOP INDICATES YOUR AGREEMENT TO THESE TERMS, SO PLEASE READ CAREFULLY BEFORE PROCEEDING.</strong></li>
+
+                  <li><strong>You agree to provide accurate information during registration and are responsible for all actions done through your registered account on the Platform.</strong></li>
+
+                  <li><strong>Your use of the Services is at your own risk, and we shall not be liable for any consequences.</strong></li>
+
+                  <li><strong>The contents of the Platform, Services, and workshop materials are proprietary to EmBlock. You do not hold any intellectual property rights to the content.</strong></li>
+
+                  <li><strong>Unauthorized use of the Platform, Services, or workshop materials may result in action against you as per these Terms or applicable laws.</strong></li>
+
+                  <li><strong>You agree to pay for the workshop and not use the Platform for any unlawful or illegal purposes.</strong></li>
+
+                  <li><strong>When registering for the workshop on the Platform, you are entering into a legally binding contract with EmBlock.</strong></li>
+
+                  <li><strong>You agree to indemnify and hold EmBlock harmless from any third-party claims due to your breach of these Terms.</strong></li>
+
+                  <li><strong>EmBlock will not be liable for any indirect, consequential, or punitive damages arising from your use of the Services or participation in the workshop.</strong></li>
+
+                  <li><strong>Liability will not exceed the amount paid by you for the workshop or Rs. 100, whichever is less.</strong></li>
+
+                  <li><strong>Performance of obligations may be delayed or prevented by a force majeure event.</strong></li>
+
+                  <li><strong>These Terms are governed by the laws of India, and disputes will be subject to the jurisdiction of courts in [Cuddalore, TamilNadu].</strong></li>
+
+                  <li><strong>Concerns regarding these Terms must be communicated using the contact information provided on the website.</strong></li>
+
                 </ul>
               </div>
 
@@ -120,7 +137,7 @@ const Footer = () => {
         )}
 
         {/* Modal for Return Policy */}
-        {openModal === "return" && (
+        {openModal === "privacy" && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <button
               className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-md "
@@ -129,70 +146,70 @@ const Footer = () => {
               Close
             </button>
             <div className="mx-4 bg-white border border-4 border-green-500 text-black px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
-              <h2 className="text-lg text-center font-semibold mb-4">Return Policy</h2>
-              <div className=" font-semibold mb-4">
+              <h2 className="text-lg text-center font-extrabold mb-4">EmBlock Workshop Privacy Policy</h2>
+              <div className="mb-4">
                 <ul className="list-disc pl-5 flex flex-col items-start">
-                  <li>We offer a refund or exchange within [X] days from the date of purchase. After [X] days, returns, exchanges, or refunds will not be accepted.</li>
-                  <li>To be eligible for a return or exchange:
-                    <ul className="list-disc pl-5">
-                      <li>The purchased item must be unused and in the same condition as you received it.</li>
-                      <li>The item must have the original packaging.</li>
-                      <li>If the item was purchased on sale, it may not be eligible for return or exchange.</li>
-                      <li>Items are only replaced if they are defective or damaged, based on an exchange request.</li>
-                    </ul>
-                  </li>
-                  <li>To place a return or exchange request for an eligible product/item, send us an email at [X].</li>
-                  <li>Certain categories of products/items may be exempt from returns or refunds. Such categories will be identified to you at the time of purchase.</li>
-                  <li>For accepted return/exchange requests:
-                    <ul className="list-disc pl-5">
-                      <li>Once we receive and inspect your returned product/item, we will email you to notify you of its receipt.</li>
-                      <li>If approved after quality check, your return or exchange request will be processed in accordance with our policies.</li>
-                    </ul>
-                  </li>
+
+
+                  <p>Last updated: [19/09/2024]</p>
+
+                  <p>EmBlock ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you participate in our workshop or use our website at emblock.in ("Site").</p>
+
+                  <h2>1. Information We Collect</h2>
+                  <ul>
+                    <li><strong>Personal Information:</strong> When you register for our workshop, we may collect your name, email address, phone number, and payment information.</li>
+                    <li><strong>Usage Data:</strong> We may collect information on how you interact with our Site, including IP address, browser type, pages visited, and time spent on pages.</li>
+                  </ul>
+
+                  <h2>2. How We Use Your Information</h2>
+                  <p>We use the information we collect to:</p>
+                  <ul>
+                    <li>Process your workshop registration and payment</li>
+                    <li>Communicate with you about the workshop</li>
+                    <li>Improve our services and Site</li>
+                    <li>Send you promotional emails about future workshops</li>
+                  </ul>
+
+                  <h2>3. Information Sharing and Disclosure</h2>
+                  <p>We do not sell or rent your personal information to third parties. We may share your information with:</p>
+                  <ul>
+                    <li>Service providers who assist us in operating our business</li>
+                    <li>Law enforcement or other governmental officials, in response to a verified request</li>
+                  </ul>
+
+                  <h2>4. Data Security</h2>
+                  <p>We implement reasonable security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure.</p>
+
+                  <h2>5. Your Rights</h2>
+                  <p>You have the right to:</p>
+                  <ul>
+                    <li>Access the personal information we hold about you</li>
+                    <li>Request correction of your personal information</li>
+                    <li>Request deletion of your personal information, subject to any legal obligations we may have</li>
+                  </ul>
+
+                  <h2>6. Cookies and Similar Technologies</h2>
+                  <p>We use cookies and similar tracking technologies to collect information about your browsing activities on our Site. You can set your browser to refuse all or some browser cookies.</p>
+
+                  <h2>7. Changes to This Privacy Policy</h2>
+                  <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.</p>
+
+                  <h2>8. Contact Us</h2>
+                  <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+                  <p>[23 a ramadoss salai nehru nagar neveli Cuddalore-607308, Ph: +91 99523 11408]</p>
+
                 </ul>
+
               </div>
 
             </div>
           </div>
-        )}
-
-        {/* Modal for Cancellation and Refund Policy */}
-        {openModal === "refund" && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <button
-              className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-md "
-              onClick={handleCloseModal}
-            >
-              Close
-            </button>
-            <div className="mx-4 bg-white text-black  border border-4 border-green-500 rounded-lg shadow-lg px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
-              <h2 className="text-lg text-center font-semibold mb-4">Cancellation and Refund Policy</h2>
-              <div className="text-black font-semibold mb-4 flex flex-col items-start">
-                <ul className="list-disc pl-5">
-                  <li>This cancellation policy outlines how you can cancel or seek a refund for a product/service purchased through the Platform.</li>
-                  <li>Cancellations will only be considered if the request is made within [X] days of placing the order.</li>
-                  <li>Cancellation requests may not be entertained if:
-                    <ul className="list-disc pl-5">
-                      <li>The orders have been communicated to the seller/merchant listed on the Platform.</li>
-                      <li>The shipping process has been initiated.</li>
-                      <li>The product is out for delivery. In such cases, you may reject the product at the doorstep.</li>
-                    </ul>
-                  </li>
-                  <li>[X] does not accept cancellation requests for perishable items such as flowers, eatables, etc. However, a refund or replacement can be processed if the user establishes that the product quality delivered is substandard.</li>
-                  <li>For damaged or defective items, report the issue to our customer service team. The request will be processed once the seller/merchant verifies the claim. This should be reported within [X] days of receiving the product.</li>
-                  <li>If the product received does not match the description or your expectations, inform customer service within [X] days of receipt. Our team will review the complaint and take appropriate action.</li>
-                  <li>For products that come with a manufacturer warranty, please refer the issue to the manufacturer.</li>
-                  <li>If [X] approves a refund, it will take [X] days for the refund to be processed.</li>
-                </ul>
-              </div>
+        )
+        }
 
 
-
-            </div>
-          </div>
-        )}
-      </div>
-    </footer>
+      </div >
+    </footer >
   );
 };
 
