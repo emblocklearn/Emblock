@@ -5,7 +5,7 @@ import embeddedSystemsImage from '../assets/backendimg.png'; // Ensure the image
 import html2pdf from 'html2pdf.js';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db } from './firebase'; // Import storage and db
+import { storage, db } from '../firebase';
 
 
 const Checkout = () => {
@@ -168,7 +168,7 @@ const Checkout = () => {
 
     try {
       await updateDoc(userDocRef, {
-        paymentDetails: [paymentDetails] // Adding paymentDetails array
+        paymentDetails: [paymentDetails]
       });
       console.log('Payment details updated successfully');
     } catch (error) {
@@ -201,7 +201,7 @@ const Checkout = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount: 1 }),
+        body: JSON.stringify({ amount: 1180 }),
       });
 
       if (!data.ok) {

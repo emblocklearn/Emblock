@@ -1,20 +1,21 @@
-// firebase.js (or firebaseConfig.js, depending on your file structure)
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // Import Firestore
+import { getFirestore } from "firebase/firestore"; // Correct import for Firestore
+import { getStorage } from "firebase/storage"; // Correct import for Storage
 
-// Your Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCEyHHTq7X6wvS2epVD9vM_Kt_w18NfQxg",
-  authDomain: "emblock-3a756.firebaseapp.com",
-  projectId: "emblock-3a756",
-  storageBucket: "emblock-3a756.appspot.com",
-  messagingSenderId: "364457031684",
-  appId: "1:364457031684:web:b99c035b963f5961d41d51",
-  measurementId: "G-132X1BMNQT"
+  apiKey: "AIzaSyCreflX62JemxL0z_njqDdHw1vh0eqG8TU",
+  authDomain: "project-emblock.firebaseapp.com",
+  projectId: "project-emblock",
+  storageBucket: "project-emblock.appspot.com",
+  messagingSenderId: "1087971879166",
+  appId: "1:1087971879166:web:83b3251c5dc6aaf6331daf",
+  measurementId: "G-6N7FYEPR5V"
 };
 
-// Initialize Firebase app
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app); // Initialize Firestore
+const storage = getStorage(app); // Initialize Storage
 
-// Initialize Firestore and export it
-export const db = getFirestore(app);
+export { db, storage }; // Export Firestore and Storage

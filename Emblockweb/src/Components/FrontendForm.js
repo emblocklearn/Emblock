@@ -90,7 +90,7 @@ const FrontendForm = () => {
     }
   
     try {
-      // Create a new document in Firestore
+      // Create a new document in Firestore with the email as the document ID
       const docRef = doc(db, "Users", formData.email);
       await setDoc(docRef, {
         ...formData,
@@ -98,18 +98,19 @@ const FrontendForm = () => {
         timestamp: new Date(),
       });
   
-      // Retrieve the document ID
-      const docId = docRef.id;
+      // Use formData.email as the document ID since we are using it as the docRef
+      const docId = formData.email;
   
       // Navigate to checkout page with user data and document ID
       navigate('/checkout', { state: { name: formData.fullName, email: formData.email, title: title, docId: docId } });
       toast.success('Form submitted successfully');
     } catch (error) {
-      console.error('Error storing form data:', error);
+      console.error('Error storing form data:', error.message); // Log the error message
       toast.error('Failed to submit form');
-      alert('Failed to submit form');
+      alert('Failed to submit form: ' + error.message); // Show detailed error to user
     }
   };
+  
   
 
   return (
