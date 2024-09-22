@@ -14,11 +14,11 @@ const Footer = () => {
     setOpenModal(null);
   };
   return (
-    <footer className="bg-black text-white pt-14  px-8 md:px-16">
+    <footer className="bg-black text-white mt-6  py-6 px-8 md:px-16">
       <div className="flex flex-col md:flex-row justify-between items-center">
 
         {/* Logo and Title Section */}
-        <div className="flex flex-col md:flex-col items-center md:items-start  mb-6 md:mb-0">
+        <div className="flex flex-col md:flex-col items-center md:items-start ">
           <div className="flex items-center mb-4 md:mb-0">
             <img src={logo} alt="Emblock Logo" className="h-12 w-12" />
             <h2 className="text-xl font-bold ml-4">Emblock</h2>
@@ -90,7 +90,7 @@ const Footer = () => {
 
                   <li><strong>Published in accordance with Rule 3(1) of the Information Technology (Intermediaries Guidelines) Rules, 2011, which requires publishing the rules and regulations, privacy policy, and Terms of Use for the domain emblock.in ("Website"), including mobile site and mobile application ("Platform").</strong></li>
 
-                  <li><strong>The Platform is owned by EmBlock, with its registered office at [23 a ramadoss salai nehru nagar neveli Cuddalore-607308] (referred to as "EmBlock", "we", "us", "our").</strong></li>
+                  <li><strong>The Platform is owned by EmBlock, with its registered office at [23 a ramadoss salai nehru nagar neyveli Cuddalore-607308] (referred to as "EmBlock", "we", "us", "our").</strong></li>
 
                   <li><strong>Your use of the Platform and its services, including the workshop, are governed by the following terms and conditions ("Terms of Use"). By using the Platform or registering for the workshop, you contract with EmBlock, and these terms constitute your binding obligations.</strong></li>
 
@@ -196,7 +196,7 @@ const Footer = () => {
 
                   <h2>8. Contact Us</h2>
                   <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-                  <p>[23 a ramadoss salai nehru nagar neveli Cuddalore-607308, Ph: +91 99523 11408]</p>
+                  <p>[23 a ramadoss salai nehru nagar neyveli Cuddalore-607308, Ph: +91 99523 11408]</p>
 
                 </ul>
 

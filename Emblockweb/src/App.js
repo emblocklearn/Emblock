@@ -6,10 +6,13 @@ import OfferSection from './Components/OfferSection';
 import ApplyNow from './Components/Apply';
 import Quotes from './Components/Quotes';
 import Footer from './Components/Footer';
+import ComingSoon from './Components/ComingSoon';
 import FrontendForm from './Components/FrontendForm'; // FrontendForm component
 import Checkout from './Components/Checkout'; // Checkout component
+import Slider from './Components/Slider';
+import FaqSection from './Components/FaqSection';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import data from './Components/Data'
+import {offerItems} from './Components/Data'
 
 
 function App() {
@@ -24,13 +27,20 @@ function App() {
             element={
               <>
                 <HeroSection />
-                
+
+                <ComingSoon />
                 <WhyEmblock />
                 <div id='offer'>
-                <OfferSection offerItems={data } />
+                <OfferSection offerItems={offerItems } />
                 </div>
+                <div className='bg-black mt-6'>  
+                <Slider />
+                </div>
+              
                 
                 <Quotes />
+                <FaqSection />
+
                 <Footer />
       
               

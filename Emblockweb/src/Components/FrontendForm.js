@@ -36,7 +36,7 @@ const FrontendForm = () => {
         orderId: '',
         paymentStatus: false,
         invoiceId: '',
-        invoiceUrl  : '',
+        invoiceUrl: '',
       }
     ]
   });
@@ -47,48 +47,195 @@ const FrontendForm = () => {
     navigate('/');
   };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value
+  //   });
+
+
+  //   if (name === "email") {
+  //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //     if (!emailRegex.test(value)) {
+  //       setErrors((prev) => ({
+  //         ...prev,
+  //         email: "Please enter a valid email address"
+  //       }));
+  //     } else {
+  //       setErrors((prev) => ({
+  //         ...prev,
+  //         email: ""
+  //       }));
+  //     }
+  //   }
+
+  //   // Validate fields (you can add more validations as needed)
+  //   if (name === "Department" && !value) {
+  //     setErrors((prevErrors) => ({
+  //       ...prevErrors,
+  //       Department: "Department is required",
+  //     }));
+  //   } else if (name === "Batch" && !value) {
+  //     setErrors((prevErrors) => ({
+  //       ...prevErrors,
+  //       Batch: "Batch is required",
+  //     }));
+  //   } else {
+  //     setErrors((prevErrors) => ({
+  //       ...prevErrors,
+  //       [name]: "",
+  //     }));
+  //   }
+  // };
+
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Update form data
     setFormData({
       ...formData,
       [name]: value
     });
 
-    // Validate fields (you can add more validations as needed)
-    if (name === "Department" && !value) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        Department: "Department is required",
-      }));
-    } else if (name === "Batch" && !value) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        Batch: "Batch is required",
-      }));
-    } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: "",
-      }));
+    // Email validation
+    if (name === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        setErrors((prev) => ({
+          ...prev,
+          email: "Please enter a valid email address"
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          email: ""
+        }));
+      }
+    }
+
+    // Validate Department
+    if (name === "Department") {
+      if (!value) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          Department: "Department is required",
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          Department: "",
+        }));
+      }
+    }
+
+    // Validate Batch and should be greater than 2020
+    if (name === "Batch") {
+      if (!value) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          Batch: "Batch is required",
+        }));
+      } else if (value < 2020) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          Batch: "Batch should be greater than 2020",
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          Batch: "",
+        }));
+      }
+    }
+
+
+
+
+
+    // Validate xMark
+    if (name === "xMark") {
+      if (!value) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          xMark: "X Mark is required",
+        }));
+      } else if (value < 0 || value > 100) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          xMark: "X Mark should be between 0 and 100",
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          xMark: "",
+        }));
+      }
+    }
+
+    // Validate xiiMark
+    if (name === "xiiMark") {
+      if (!value) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          xiiMark: "XII Mark is required",
+        }));
+      } else if (value < 0 || value > 100) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          xiiMark: "XII Mark should be between 0 and 100",
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          xiiMark: "",
+        }));
+      }
+    }
+
+    // Validate currentCGPA and value should be between 0 and 10
+    if (name === "currentCGPA") {
+      if (!value) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          currentCGPA: "Current CGPA is required",
+        }));
+      } else if (value < 0 || value > 10) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          currentCGPA: "Current CGPA should be between 0 and 10",
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          currentCGPA: "",
+        }));
+      }
     }
   };
 
+
+
+
   const handleProceedClick = async () => {
     const newErrors = {};
-  
+
     // Check if any field is empty and set errors
     for (let key in formData) {
       if (!formData[key]) {
         newErrors[key] = `Please fill the ${key} field.`;
       }
     }
-  
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors); // Set errors if any fields are empty
       alert("Please fill all the required fields.");
       return;
     }
-  
+
     try {
       // Create a new document in Firestore with the email as the document ID
       const docRef = doc(db, "Users", formData.email);
@@ -97,10 +244,10 @@ const FrontendForm = () => {
         course: title || 'Unknown Course',
         timestamp: new Date(),
       });
-  
+
       // Use formData.email as the document ID since we are using it as the docRef
       const docId = formData.email;
-  
+
       // Navigate to checkout page with user data and document ID
       navigate('/checkout', { state: { name: formData.fullName, email: formData.email, title: title, docId: docId } });
       toast.success('Form submitted successfully');
@@ -110,26 +257,21 @@ const FrontendForm = () => {
       alert('Failed to submit form: ' + error.message); // Show detailed error to user
     }
   };
-  
-  
+
+
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-white relative">
-      <ToastContainer /> 
-      
+    <div className="py-4  pb-12 min-h-screen flex justify-center items-center bg-white relative">
+      <ToastContainer />
+
       <div
         className="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 max-w-4xl relative z-10"
-        style={{
-          backgroundImage: `url(${bground})`,
-          backgroundSize: "500px 500px",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
+
       >
         <button
-          className="absolute top-4 -ml-6 -mt-6  md:left-[-7px] bg-green-500 text-white p-2 rounded-full flex text-black items-center hover:bg-green-600"
+          className="absolute top-6 left-3 bg-green-500 text-white p-2 rounded-full flex text-black items-center hover:bg-green-600"
           onClick={handleBackClick}
-          style={{ left: "35px", top: "30px", transform: "translateX(-50%)" }} // Center the button horizontally
+
         >
           <FaArrowLeft />
         </button>
@@ -225,36 +367,36 @@ const FrontendForm = () => {
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
               >
                 <option value="" disabled selected hidden>
-    Select a State
-  </option>
+                  Select a State
+                </option>
                 <option>Andhra Pradesh</option>
-<option>Arunachal Pradesh</option>
-<option>Assam</option>
-<option>Bihar</option>
-<option>Chhattisgarh</option>
-<option>Goa</option>
-<option>Gujarat</option>
-<option>Haryana</option>
-<option>Himachal Pradesh</option>
-<option>Jharkhand</option>
-<option>Karnataka</option>
-<option>Kerala</option>
-<option>Madhya Pradesh</option>
-<option>Maharashtra</option>
-<option>Manipur</option>
-<option>Meghalaya</option>
-<option>Mizoram</option>
-<option>Nagaland</option>
-<option>Odisha</option>
-<option>Punjab</option>
-<option>Rajasthan</option>
-<option>Sikkim</option>
-<option>Tamil Nadu</option>
-<option>Telangana</option>
-<option>Tripura</option>
-<option>Uttar Pradesh</option>
-<option>Uttarakhand</option>
-<option>West Bengal</option>
+                <option>Arunachal Pradesh</option>
+                <option>Assam</option>
+                <option>Bihar</option>
+                <option>Chhattisgarh</option>
+                <option>Goa</option>
+                <option>Gujarat</option>
+                <option>Haryana</option>
+                <option>Himachal Pradesh</option>
+                <option>Jharkhand</option>
+                <option>Karnataka</option>
+                <option>Kerala</option>
+                <option>Madhya Pradesh</option>
+                <option>Maharashtra</option>
+                <option>Manipur</option>
+                <option>Meghalaya</option>
+                <option>Mizoram</option>
+                <option>Nagaland</option>
+                <option>Odisha</option>
+                <option>Punjab</option>
+                <option>Rajasthan</option>
+                <option>Sikkim</option>
+                <option>Tamil Nadu</option>
+                <option>Telangana</option>
+                <option>Tripura</option>
+                <option>Uttar Pradesh</option>
+                <option>Uttarakhand</option>
+                <option>West Bengal</option>
               </select>
               {errors.state && <p className="text-red-500 text-sm">{errors.state}</p>}
             </div>
@@ -268,45 +410,45 @@ const FrontendForm = () => {
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
               >
                 <option value="" disabled selected hidden>
-    Select a District
-  </option>
+                  Select a District
+                </option>
                 <option>Ariyalur</option>
-<option>Chengalpattu</option>
-<option>Chennai</option>
-<option>Coimbatore</option>
-<option>Cuddalore</option>
-<option>Dharmapuri</option>
-<option>Dindigul</option>
-<option>Erode</option>
-<option>Kallakurichi</option>
-<option>Kancheepuram</option>
-<option>Karur</option>
-<option>Krishnagiri</option>
-<option>Madurai</option>
-<option>Mayiladuthurai</option>
-<option>Nagapattinam</option>
-<option>Namakkal</option>
-<option>Nilgiris</option>
-<option>Perambalur</option>
-<option>Pudukkottai</option>
-<option>Ramanathapuram</option>
-<option>Ranipet</option>
-<option>Salem</option>
-<option>Sivaganga</option>
-<option>Tenkasi</option>
-<option>Thanjavur</option>
-<option>Theni</option>
-<option>Thoothukudi</option>
-<option>Tiruchirappalli</option>
-<option>Tirunelveli</option>
-<option>Tirupattur</option>
-<option>Tiruppur</option>
-<option>Tiruvallur</option>
-<option>Tiruvannamalai</option>
-<option>Tiruvarur</option>
-<option>Vellore</option>
-<option>Viluppuram</option>
-<option>Virudhunagar</option>
+                <option>Chengalpattu</option>
+                <option>Chennai</option>
+                <option>Coimbatore</option>
+                <option>Cuddalore</option>
+                <option>Dharmapuri</option>
+                <option>Dindigul</option>
+                <option>Erode</option>
+                <option>Kallakurichi</option>
+                <option>Kancheepuram</option>
+                <option>Karur</option>
+                <option>Krishnagiri</option>
+                <option>Madurai</option>
+                <option>Mayiladuthurai</option>
+                <option>Nagapattinam</option>
+                <option>Namakkal</option>
+                <option>Nilgiris</option>
+                <option>Perambalur</option>
+                <option>Pudukkottai</option>
+                <option>Ramanathapuram</option>
+                <option>Ranipet</option>
+                <option>Salem</option>
+                <option>Sivaganga</option>
+                <option>Tenkasi</option>
+                <option>Thanjavur</option>
+                <option>Theni</option>
+                <option>Thoothukudi</option>
+                <option>Tiruchirappalli</option>
+                <option>Tirunelveli</option>
+                <option>Tirupattur</option>
+                <option>Tiruppur</option>
+                <option>Tiruvallur</option>
+                <option>Tiruvannamalai</option>
+                <option>Tiruvarur</option>
+                <option>Vellore</option>
+                <option>Viluppuram</option>
+                <option>Virudhunagar</option>
               </select>
               {errors.district && <p className="text-red-500 text-sm">{errors.district}</p>}
             </div>
@@ -338,37 +480,37 @@ const FrontendForm = () => {
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
               >
                 <option value="" disabled selected hidden>
-    Select a degree
-  </option>
+                  Select a degree
+                </option>
                 <option>Bachelor of Arts (BA)</option>
-<option>Bachelor of Science (BSc)</option>
-<option>Bachelor of Commerce (BCom)</option>
-<option>Bachelor of Business Administration (BBA)</option>
-<option>Bachelor of Computer Applications (BCA)</option>
-<option>Bachelor of Technology (BTech)</option>
-<option>Bachelor of Engineering (BE)</option>
-<option>Bachelor of Medicine and Bachelor of Surgery (MBBS)</option>
-<option>Bachelor of Dental Surgery (BDS)</option>
-<option>Bachelor of Pharmacy (BPharm)</option>
-<option>Bachelor of Science in Nursing (BSc Nursing)</option>
-<option>Bachelor of Architecture (BArch)</option>
-<option>Bachelor of Education (BEd)</option>
-<option>Bachelor of Fine Arts (BFA)</option>
-<option>Bachelor of Design (BDes)</option>
-<option>Bachelor of Hotel Management (BHM)</option>
-<option>Bachelor of Social Work (BSW)</option>
-<option>Bachelor of Physiotherapy (BPT)</option>
-<option>Bachelor of Veterinary Science (BVSc)</option>
-<option>Bachelor of Law (LLB)</option>
-<option>Bachelor of Science in Agriculture (BSc Agriculture)</option>
-<option>Bachelor of Journalism and Mass Communication (BJMC)</option>
-<option>Bachelor of Aviation (BAviation)</option>
-<option>Bachelor of Home Science (BHS)</option>
-<option>Bachelor of Library Science (BLibSc)</option>
-<option>Bachelor of Physical Education (BPEd)</option>
+                <option>Bachelor of Science (BSc)</option>
+                <option>Bachelor of Commerce (BCom)</option>
+                <option>Bachelor of Business Administration (BBA)</option>
+                <option>Bachelor of Computer Applications (BCA)</option>
+                <option>Bachelor of Technology (BTech)</option>
+                <option>Bachelor of Engineering (BE)</option>
+                <option>Bachelor of Medicine and Bachelor of Surgery (MBBS)</option>
+                <option>Bachelor of Dental Surgery (BDS)</option>
+                <option>Bachelor of Pharmacy (BPharm)</option>
+                <option>Bachelor of Science in Nursing (BSc Nursing)</option>
+                <option>Bachelor of Architecture (BArch)</option>
+                <option>Bachelor of Education (BEd)</option>
+                <option>Bachelor of Fine Arts (BFA)</option>
+                <option>Bachelor of Design (BDes)</option>
+                <option>Bachelor of Hotel Management (BHM)</option>
+                <option>Bachelor of Social Work (BSW)</option>
+                <option>Bachelor of Physiotherapy (BPT)</option>
+                <option>Bachelor of Veterinary Science (BVSc)</option>
+                <option>Bachelor of Law (LLB)</option>
+                <option>Bachelor of Science in Agriculture (BSc Agriculture)</option>
+                <option>Bachelor of Journalism and Mass Communication (BJMC)</option>
+                <option>Bachelor of Aviation (BAviation)</option>
+                <option>Bachelor of Home Science (BHS)</option>
+                <option>Bachelor of Library Science (BLibSc)</option>
+                <option>Bachelor of Physical Education (BPEd)</option>
 
 
-                
+
               </select>
               {errors.degree && <p className="text-red-500 text-sm">{errors.degree}</p>}
             </div>
@@ -400,6 +542,7 @@ const FrontendForm = () => {
               <input
                 type="number"
                 name="xMark"
+                max="100"
                 value={formData.xMark}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
@@ -412,10 +555,13 @@ const FrontendForm = () => {
               <input
                 type="number"
                 name="xiiMark"
+                min="0"
+                max="100"
                 value={formData.xiiMark}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
               />
+
               {errors.xiiMark && <p className="text-red-500 text-sm">{errors.xiiMark}</p>}
             </div>
 
@@ -424,6 +570,7 @@ const FrontendForm = () => {
               <input
                 type="number"
                 name="currentCGPA"
+                max="10"
                 value={formData.currentCGPA}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
@@ -433,74 +580,74 @@ const FrontendForm = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-  <div className="w-full">
-    <label className="block text-sm font-medium">Languages/Softwares Known</label>
-    <input
-      type="text"
-      name="languages"
-      value={formData.languages}
-      onChange={handleChange}
-      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-    />
-    {errors.languages && <p className="text-red-500 text-sm">{errors.languages}</p>}
-  </div>
+            <div className="w-full">
+              <label className="block text-sm font-medium">Languages/Softwares Known</label>
+              <input
+                type="text"
+                name="languages"
+                value={formData.languages}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              />
+              {errors.languages && <p className="text-red-500 text-sm">{errors.languages}</p>}
+            </div>
 
-  <div className="w-full">
-    <label className="block text-sm font-medium">Career Goal</label>
-    <input
-      type="text"
-      name="careerGoal"
-      value={formData.careerGoal}
-      onChange={handleChange}
-      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-    />
-    {errors.careerGoal && <p className="text-red-500 text-sm">{errors.careerGoal}</p>}
-  </div>
+            <div className="w-full">
+              <label className="block text-sm font-medium">Career Goal</label>
+              <input
+                type="text"
+                name="careerGoal"
+                value={formData.careerGoal}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              />
+              {errors.careerGoal && <p className="text-red-500 text-sm">{errors.careerGoal}</p>}
+            </div>
 
-  <div className="w-full">
-    <label className="block text-sm font-medium">Internships (If Any)</label>
-    <input
-      type="text"
-      name="internship"
-      value={formData.internship}
-      onChange={handleChange}
-      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-    />
-    {errors.internship && <p className="text-red-500 text-sm">{errors.internship}</p>}
-  </div>
+            <div className="w-full">
+              <label className="block text-sm font-medium">Internships (If Any) or put NA</label>
+              <input
+                type="text"
+                name="internship"
+                value={formData.internship}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              />
+              {errors.internship && <p className="text-red-500 text-sm">{errors.internship}</p>}
+            </div>
 
-  <div className="w-full">
-    <label className="block text-sm font-medium">How Did You Hear About Us?</label>
-    <select
-      name="referral"
-      value={formData.referral}
-      onChange={handleChange}
-      className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-    >
-      <option value="" disabled selected hidden>Select an option</option>
-      <option>Google Search</option>
-      <option>Social Media (Facebook, Instagram, etc.)</option>
-      <option>Friends or Family</option>
-      <option>Online Ads</option>
-      <option>Television</option>
-      <option>Radio</option>
-      <option>Newspaper or Magazine</option>
-      <option>Event or Conference</option>
-      <option>Word of Mouth</option>
-      <option>Email Newsletter</option>
-      <option>Billboard</option>
-      <option>Referral from a Partner</option>
-      <option>Blog or Website</option>
-      <option>YouTube</option>
-      <option>Other</option>
-    </select>
-    {errors.referral && <p className="text-red-500 text-sm">{errors.referral}</p>}
-  </div>
-</div>
+            <div className="w-full">
+              <label className="block text-sm font-medium">How Did You Hear About Us?</label>
+              <select
+                name="referral"
+                value={formData.referral}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              >
+                <option value="" disabled selected hidden>Select an option</option>
+                <option>Google Search</option>
+                <option>Social Media (Facebook, Instagram, etc.)</option>
+                <option>Friends or Family</option>
+                <option>Online Ads</option>
+                <option>Television</option>
+                <option>Radio</option>
+                <option>Newspaper or Magazine</option>
+                <option>Event or Conference</option>
+                <option>Word of Mouth</option>
+                <option>Email Newsletter</option>
+                <option>Billboard</option>
+                <option>Referral from a Partner</option>
+                <option>Blog or Website</option>
+                <option>YouTube</option>
+                <option>Other</option>
+              </select>
+              {errors.referral && <p className="text-red-500 text-sm">{errors.referral}</p>}
+            </div>
+          </div>
 
 
-          
-          
+
+
           <div className="mt-6 flex justify-center">
             <button
               type="button"

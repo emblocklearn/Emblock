@@ -3,6 +3,9 @@
 @tailwind components; /* Add this line */
 @tailwind utilities;
 
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 html {
     scroll-behavior: smooth;
   }

@@ -9,7 +9,7 @@ const Apply = ({ offer, onClose }) => {
   };
 
   return (
-    <div className="relative flex flex-col w-full h-screen md:h-auto  md:flex-row justify-between items-center bg-gray-100 p-8 rounded-lg shadow-lg mx-auto max-w-[66rem] overflow-auto  px-4">
+    <div className="relative flex flex-col w-full h-screen md:h-auto  md:flex-row justify-between items-center bg-gray-100 p-6 md:p-10 rounded-lg shadow-lg max-w-[66rem] overflow-auto ">
       {/* Close Button */}
       <div className="absolute top-2 right-2">
         <button

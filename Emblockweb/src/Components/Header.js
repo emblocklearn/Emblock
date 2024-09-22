@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../assets/emblocklogo.png'
+import logo from '../assets/emblocklogo.png';
+import { Link } from 'react-router-dom';
 
 
 
@@ -11,7 +12,9 @@ const Header = () => (
             alt="Logo"
             className="h-8 w-8 mr-2"
           />
+        <Link to="/" className="text-white">
         <h1 className="text-2xl font-bold">Emblock Learn</h1>
+        </Link>
       </div>
     </div>
   );
