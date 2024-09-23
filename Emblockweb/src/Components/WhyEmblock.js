@@ -1,8 +1,8 @@
 import React from 'react';
 
 const WhyEmblock = () => (
-  <div className="mt-6 py-4 px-6 md:px-16 bg-white text-center">
-    <h2 className="text-[24px] md:text-[40px] font-bold text-gray-900 py-6">
+  <div className="py-12 px-6 md:px-16 bg-white text-center">
+    <h2 className="text-[24px] md:text-[40px] font-bold text-gray-900 ">
       Why Emblock?
     </h2>
     <p
