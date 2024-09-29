@@ -18,10 +18,17 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row justify-between items-center">
 
         {/* Logo and Title Section */}
-        <div className="flex flex-col md:flex-col items-center md:items-start ">
+        <div className="flex flex-col md:flex-col gap-4 items-center md:items-start ">
           <div className="flex items-center mb-4 md:mb-0">
-            <img src={logo} alt="Emblock Logo" className="h-12 w-12" />
-            <h2 className="text-xl font-bold ml-4">Emblock</h2>
+            <div className='h-10 w-12'>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/assests%2Femblocklogo3.png?alt=media&token=e2fd552b-7338-460d-ba8f-1634177267a7"
+                alt="Logo"
+                className="w-full h-full"
+              />
+
+            </div>
+            <h2 className="text-xl font-bold ml-2">Emblock</h2>
           </div>
           <div>
             <p className="text-center md:text-left text-[15px]">

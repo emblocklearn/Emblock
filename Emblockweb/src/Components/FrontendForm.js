@@ -31,6 +31,13 @@ const FrontendForm = () => {
     careerGoal: '',
     internship: '',
     referral: '',
+    domain: '',
+    tools: '',
+    rating: 5,
+    linkedIn: '',
+    github: '',
+    interest: '',
+    otherDomain: '',
     paymentDetails: [
       {
         orderId: '',
@@ -38,7 +45,8 @@ const FrontendForm = () => {
         invoiceId: '',
         invoiceUrl: '',
       }
-    ]
+    ],
+
   });
 
   const [errors, setErrors] = useState({});
@@ -269,7 +277,7 @@ const FrontendForm = () => {
 
       >
         <button
-          className="absolute top-6 left-3 bg-green-500 text-white p-2 rounded-full flex text-black items-center hover:bg-green-600"
+          className="absolute top-1 left-1 md:top-6 md:left-3 bg-green-500 text-white p-2 rounded-full flex text-black items-center hover:bg-green-600"
           onClick={handleBackClick}
 
         >
@@ -603,6 +611,85 @@ const FrontendForm = () => {
               />
               {errors.careerGoal && <p className="text-red-500 text-sm">{errors.careerGoal}</p>}
             </div>
+           
+
+            <div className="w-full">
+            {/* Dropdown Select for Domains */}
+            <label className="block text-sm font-medium">Have you worked/are you interested in any other domains?</label>
+            <select
+                name="domain"
+                value={formData.domain}
+                onChange={handleChange}
+                className="mt-2 block w-full border border-gray-300 rounded-lg p-2"
+            >
+                <option value="">Select a domain</option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="Graphic Designing">Graphic Designing</option>
+                <option value="Photoshop">Photoshop</option>
+                <option value="Copywriting / Script writing">Copywriting / Script writing</option>
+                <option value="Social media management">Social media management</option>
+                <option value="Others">Others</option>
+            </select>
+
+            {/* Conditionally Render Input Field for "Others" */}
+            {formData.domain === 'Others' && (
+                <input
+                    type="text"
+                    name="otherDomain"
+                    placeholder="Please specify"
+                    value={formData.otherDomain}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border border-gray-300 rounded-lg p-2"
+                />
+            )}
+        </div>
+
+            <div className="w-full">
+              {/* Interest in Domain */}
+              <label className="block text-sm font-medium mb-2">Explain why it is your interest</label>
+              <input
+                type="text"
+                name="interest"
+                placeholder="Why are you interested in this domain?"
+                value={formData.interest}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              />
+
+      
+            </div>
+
+            <div className="w-full">
+                {/* Tools Expertise */}
+                <label className="block text-sm font-medium mb-2">Tools you are experienced in</label>
+              <textarea
+                name="tools"
+                placeholder="Mention any tools you are experienced in"
+                value={formData.tools}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2 h-24"
+              ></textarea>
+
+            </div>
+            <div className="w-full">
+               {/* Rate Expertise */}
+               <div className="">
+                <label className="block text-sm font-medium mb-2">Rate your expertise (1-10)</label>
+                <input
+                  type="range"
+                  name="rating"
+                  min="1"
+                  max="10"
+                  value={formData.rating}
+                  onChange={handleChange}
+                  className="w-full"
+                />
+                <p className="text-sm text-gray-600 mt-2">Rating: {formData.rating}/10</p>
+              </div>
+            </div>
+
+
+
 
             <div className="w-full">
               <label className="block text-sm font-medium">Internships (If Any) or put NA</label>
@@ -614,6 +701,35 @@ const FrontendForm = () => {
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
               />
               {errors.internship && <p className="text-red-500 text-sm">{errors.internship}</p>}
+            </div>
+
+
+             {/* LinkedIn Profile Link */}
+             <div className="w-full">
+                <label className="block text-sm font-medium">LinkedIn Profile Link</label>
+                <input
+                    type="url"
+                    name="linkedIn"
+                    value={formData.linkedIn}
+                    onChange={handleChange}
+                    placeholder="https://linkedin.com/in/your-profile"
+                    className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+                />
+                {errors.linkedIn && <p className="text-red-500 text-sm">{errors.linkedIn}</p>}
+            </div>
+
+            {/* GitHub Profile Link */}
+            <div className="w-full">
+                <label className="block text-sm font-medium">GitHub Profile Link</label>
+                <input
+                    type="url"
+                    name="github"
+                    value={formData.github}
+                    onChange={handleChange}
+                    placeholder="https://github.com/your-username"
+                    className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+                />
+                {errors.github && <p className="text-red-500 text-sm">{errors.github}</p>}
             </div>
 
             <div className="w-full">

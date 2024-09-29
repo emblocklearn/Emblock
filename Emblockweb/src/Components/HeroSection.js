@@ -2,7 +2,7 @@ import React from 'react';
 import lap from '../assets/emblhero.png';
 
 const HeroSection = () => (
-  <div className="flex flex-col md:flex-row items-center py-10 px-6 md:py-14 md:px-16  bg-white-100 space-x-0 md:space-x-24">
+  <div className="flex flex-col md:flex-row items-center py-10 px-6 md:py-14 md:px-16  bg-gray-100 space-x-0 md:space-x-24">
     <div className="max-w-3xl">
       <h2 className="text-4xl md:text-6xl font-extrabold text-gray-900">
         DEVELOP YOUR <span className="text-green-500">SKILLS</span> WITH EMBLOCK !!

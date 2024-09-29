@@ -29,10 +29,10 @@ const OfferSection = ({ offerItems = [] }) => {
         <h2 className="text-[24px] text-white md:text-[40px] font-bold text-gray-900 mb-8 lg:mb-12 text-center">
           What we offer?
         </h2>
-        <div className="w-full p-2 bg-white grid grid-cols-1 gap-6 md:grid-cols-2 md:w-2/3 md:p-6">
+        <div className="w-full p-2  bg-white grid grid-cols-1 gap-6 md:grid-cols-2 md:w-2/3 md:p-6">
           {Array.isArray(offerItems) && offerItems.length > 0 ? (
             offerItems.map((item, index) => (
-              <div className="text-center group relative overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out" key={index}>
+              <div   onClick={() => handleClick(item)} className="text-center cursor-pointer group relative overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out" key={index}>
                 <div className="relative group">
                   <img
                     src={item.imgSrc}
@@ -49,7 +49,7 @@ const OfferSection = ({ offerItems = [] }) => {
                   </div>
                   <button
                     className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 w-10 h-10 bg-green-600 text-white rounded-full bg-green-400 flex justify-center items-center transition duration-300 ease-in-out opacity-80 hover:opacity-100"
-                    onClick={() => handleClick(item)}
+                  
                   >
                     <FaArrowRight style={{ color: 'black' }} />
                   </button>

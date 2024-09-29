@@ -29,13 +29,17 @@ const ComingSoon = () => {
                         Upcoming Schedule
                     </h2>
                     <p className="text-lg mb-2">
-                        We are working on something awesome for you. Stay tuned for updates!
+                        We're coming in December! Get ready to explore new opportunities and unlock the chance to work on Emblock's exciting client projects.
+                    </p>
+                    <p className="text-lg mb-2">
+                        Mark your calendar, and don't miss the opportunity to grow and contribute!
                     </p>
                     <p className="text-lg font-bold">
                         December 1st, 2024 - December 10th, 2024
                     </p>
                 </div>
             </div>
+
         </div>
     );
 };

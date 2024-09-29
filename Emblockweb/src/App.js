@@ -11,6 +11,7 @@ import FrontendForm from './Components/FrontendForm'; // FrontendForm component
 import Checkout from './Components/Checkout'; // Checkout component
 import Slider from './Components/Slider';
 import FaqSection from './Components/FaqSection';
+import Table from './Components/Table';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {offerItems} from './Components/Data'
 
@@ -18,7 +19,7 @@ import {offerItems} from './Components/Data'
 function App() {
   return (
     <Router>
-      <div className="bg-gray-100">
+      <div>
         <Header />
         <Routes>
           {/* Default Home Page */}
@@ -33,13 +34,15 @@ function App() {
                 <div id='offer'>
                 <OfferSection offerItems={offerItems } />
                 </div>
-                <div className='bg-black mt-6'>  
+                <div className='bg-gray-100 mt-6'>  
                 <Slider />
                 </div>
               
                 
                 <Quotes />
+                <div className='bg-blue-100  mt-6'> 
                 <FaqSection />
+                </div>
 
                 <Footer />
       
@@ -53,6 +56,8 @@ function App() {
 
           {/* Checkout Page */}
           <Route path="/checkout" element={<Checkout />} />
+          
+          <Route path="/admin" element={<Table />} />
         </Routes>
       </div>
     </Router>
