@@ -63,8 +63,8 @@ export const offerItems = [
 export const faqs = [
   {
     id: 1,
-    question: "Why should I choose Full Stack Development as a career?",
-    response: "Full Stack Development offers dynamic opportunities for problem-solving, innovation, and making a real impact across industries. The demand for skilled Full Stack Developers is on the rise, making it a lucrative and fulfilling career choice."
+    question: "What are the long-term career prospects in UI/UX Design, Front-End, Back-End, and Full Stack Development?",
+    response: "All these fields are poised for significant growth over the next decade. As technology continues to advance, professionals with expertise in UI/UX, Front-End, Back-End, and Full Stack Development will be key players in shaping the future of digital experiences and infrastructure."
   },
   {
     id: 2,
@@ -73,25 +73,37 @@ export const faqs = [
   },
   {
     id: 3,
-    question: "Where should I learn Full Stack Development?",
-    response: "Our workshop will provide insights about courses and resources to kickstart your Full Stack Development journey."
+    question: "Why should I pursue a career in UI/UX Design?",
+    response: "UI/UX Design focuses on creating intuitive, user-friendly digital experiences. With businesses increasingly prioritizing user-centered designs, demand for UI/UX Designers is rapidly growing, offering creative and impactful career opportunities."
   },
   {
     id: 4,
-    question: "What can I expect from a Full Stack Development career in the next 5 to 10 years?",
-    response: "The field is expected to grow exponentially, with increased integration into various industries. As technology evolves, Full Stack Developers will play a crucial role in shaping the future of digital innovation and technology solutions."
+    question: "What are the career opportunities for Front-End Developers?",
+    response: "Front-End Developers are responsible for crafting the user interface and experience of websites and applications. Career opportunities include roles such as Front-End Developer, Web Designer, and UI Developer, with high demand across industries."
   },
   {
     id: 5,
-    question: "What skills do I need to succeed as a Full Stack Developer?",
-    response: "To succeed as a Full Stack Developer, you need strong skills in both front-end and back-end technologies, a solid understanding of databases, and familiarity with cloud services and DevOps tools."
+    question: "What makes Back-End Development a good career choice?",
+    response: "Back-End Development involves server-side logic, databases, and API integration. It is critical for creating robust, scalable applications. Careers include Back-End Developer, Database Administrator, and API Developer, with strong growth potential."
   },
   {
     id: 6,
-    question: "What are the key technologies used in Full Stack Development?",
-    response: "Key technologies include HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and SQL. Familiarity with version control systems like Git and deployment platforms like Heroku is also essential."
+    question: "What skills do I need to succeed in UI/UX Design?",
+    response: "To excel in UI/UX Design, you need skills in wireframing, prototyping, user research, and tools like Figma, Adobe XD, and Sketch. A deep understanding of user behavior and interaction design is also essential."
   },
+  {
+    id: 7,
+    question: "What technologies are essential for Front-End Development?",
+    response: "Front-End Development requires strong skills in HTML, CSS, JavaScript, and frameworks like React, Angular, or Vue.js. Knowledge of responsive design, version control, and browser developer tools is also important."
+  },
+  {
+    id: 8,
+    question: "What key technologies should I learn for Back-End Development?",
+    response: "Back-End Development relies on technologies like Node.js, Express, Python, Ruby on Rails, and databases such as SQL and MongoDB. Familiarity with cloud services, APIs, and authentication mechanisms is crucial."
+  },
+  
 ];
+
 
 
 export const testimonials = [
@@ -111,6 +123,6 @@ export const testimonials = [
     id: 3,
     content:
       'This workshop was a game-changer for my coding skills. Learning how to build user interfaces and manage servers felt like unlocking a whole new world. Plus, the mentors are so passionate, they make you want to keep learning and pushing yourself.',
-    name: 'John',
+    name: 'Lakshy',
   },
 ];

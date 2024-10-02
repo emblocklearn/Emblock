@@ -11,7 +11,7 @@ const Apply = ({ offer, onClose }) => {
   return (
     <div className="relative flex flex-col w-full h-screen md:h-auto  md:flex-row justify-between items-center bg-gray-100 p-6 md:p-10 rounded-lg shadow-lg max-w-[66rem] overflow-auto ">
       {/* Close Button */}
-      <div className="absolute top-2 right-2">
+      <div className="absolute top-4 right-4">
         <button
           className="bg-green-500 w-9 h-9 rounded-full flex items-center justify-center hover:bg-green-700"
           onClick={onClose}

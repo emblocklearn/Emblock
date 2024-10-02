@@ -6,6 +6,7 @@ import html2pdf from 'html2pdf.js';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db } from '../firebase';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 
 const Checkout = () => {
@@ -178,6 +179,7 @@ const Checkout = () => {
 
 
   const handlePayment = async () => {
+    setLoading(true);
     if (!isChecked) {
       // Optionally show a message or highlight the checkbox
       alert("You must agree to the Terms & Conditions before proceeding.");
@@ -217,7 +219,7 @@ const Checkout = () => {
         currency: jsonData.order.currency,
         name: 'Emblock Learn',
         description: 'Test Transaction',
-        image: 'https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/emblocklogo.png?alt=media&token=b594cf44-bce5-449a-86ca-a8e5e15425d8',
+        image: 'https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/assests%2Femblocklogo.png?alt=media&token=e2fd552b-7338-460d-ba8f-1634177267a7',
         order_id: jsonData.order.id,
         handler: async function (response) {
           console.log(response); 
@@ -303,8 +305,10 @@ const Checkout = () => {
 
   return (
     <div className="bg-gray-100 p-4 md:p-10">
-      <div className={`fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50 ${loading ? '' : 'hidden'}`}>
-        <div className="w-16 h-16 border-4 border-t-4 border-green-500 border-solid rounded-full animate-spin"></div>
+      <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 ${loading ? '' : 'hidden'}`}>
+      
+          <ClipLoader color="#22c55e" size={70} loading={loading} />
+      
       </div>
       <div className="max-w-full md:max-w-6xl mx-auto bg-white text-black shadow-lg rounded-lg overflow-hidden">
         <div className="flex flex-row md:flex-row items-center justify-between p-[10px] md:p-6 border-b border-gray-200">

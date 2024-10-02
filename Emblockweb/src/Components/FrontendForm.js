@@ -5,11 +5,13 @@ import bground from '../assets/formbg.png';
 import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { toast, ToastContainer } from 'react-toastify';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const FrontendForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { title } = location.state || {}; // Access the title from the state
+  const [loading, setLoading] = useState(false); // Loading state
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -55,50 +57,7 @@ const FrontendForm = () => {
     navigate('/');
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value
-  //   });
-
-
-  //   if (name === "email") {
-  //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //     if (!emailRegex.test(value)) {
-  //       setErrors((prev) => ({
-  //         ...prev,
-  //         email: "Please enter a valid email address"
-  //       }));
-  //     } else {
-  //       setErrors((prev) => ({
-  //         ...prev,
-  //         email: ""
-  //       }));
-  //     }
-  //   }
-
-  //   // Validate fields (you can add more validations as needed)
-  //   if (name === "Department" && !value) {
-  //     setErrors((prevErrors) => ({
-  //       ...prevErrors,
-  //       Department: "Department is required",
-  //     }));
-  //   } else if (name === "Batch" && !value) {
-  //     setErrors((prevErrors) => ({
-  //       ...prevErrors,
-  //       Batch: "Batch is required",
-  //     }));
-  //   } else {
-  //     setErrors((prevErrors) => ({
-  //       ...prevErrors,
-  //       [name]: "",
-  //     }));
-  //   }
-  // };
-
-
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -230,21 +189,28 @@ const FrontendForm = () => {
 
   const handleProceedClick = async () => {
     const newErrors = {};
-
-    // Check if any field is empty and set errors
-    for (let key in formData) {
-      if (!formData[key]) {
-        newErrors[key] = `Please fill the ${key} field.`;
+  
+    // List of required fields to validate
+    const requiredFields = ['fullName', 'contactNumber', 'college', 'degree', 'email', 'Department', 'Batch', 'xMark', 'xiiMark', 'currentCGPA'];
+  
+    // Check if each required field is filled and valid
+    requiredFields.forEach((field) => {
+      if (!formData[field] || formData[field].trim() === "") {
+        newErrors[field] = `Please fill the ${field} field.`;
       }
-    }
-
+    });
+  
+    // If there are any errors, stop the form submission and display errors
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors); // Set errors if any fields are empty
-      alert("Please fill all the required fields.");
+      setErrors(newErrors);
+      alert("Please fill all the required fields correctly.");
       return;
     }
-
+  
     try {
+      // Show the loading spinner
+      setLoading(true);
+
       // Create a new document in Firestore with the email as the document ID
       const docRef = doc(db, "Users", formData.email);
       await setDoc(docRef, {
@@ -252,7 +218,7 @@ const FrontendForm = () => {
         course: title || 'Unknown Course',
         timestamp: new Date(),
       });
-
+  
       // Use formData.email as the document ID since we are using it as the docRef
       const docId = formData.email;
 
@@ -263,8 +229,13 @@ const FrontendForm = () => {
       console.error('Error storing form data:', error.message); // Log the error message
       toast.error('Failed to submit form');
       alert('Failed to submit form: ' + error.message); // Show detailed error to user
+    } finally {
+      // Hide the loading spinner after the operation is complete
+      setLoading(false);
     }
   };
+
+  
 
 
 
@@ -774,6 +745,11 @@ const FrontendForm = () => {
             </button>
           </div>
         </form>
+        {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+          <ClipLoader color="#22c55e" size={70} loading={loading} />
+        </div>
+      )}
       </div>
     </div>
   );

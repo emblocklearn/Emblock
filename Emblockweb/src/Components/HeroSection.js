@@ -13,7 +13,7 @@ const HeroSection = () => (
       </p>
       <a href="#offer">
       <button className="mt-8 md:mt-14 px-16 text-[12px] md:text-[24px] md:px-24 py-3 bg-green-500 text-black font-bold rounded">
-        Explore
+        Register Now!
 
       </button>
       </a>

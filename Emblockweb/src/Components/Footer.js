@@ -20,7 +20,7 @@ const Footer = () => {
         {/* Logo and Title Section */}
         <div className="flex flex-col md:flex-col gap-4 items-center md:items-start ">
           <div className="flex items-center mb-4 md:mb-0">
-            <div className='h-10 w-12'>
+            <div className='h-6 w-8'>
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/assests%2Femblocklogo3.png?alt=media&token=e2fd552b-7338-460d-ba8f-1634177267a7"
                 alt="Logo"
@@ -28,7 +28,7 @@ const Footer = () => {
               />
 
             </div>
-            <h2 className="text-xl font-bold ml-2">Emblock</h2>
+            <h2 className="text-xl font-semibold ml-2">Emblock</h2>
           </div>
           <div>
             <p className="text-center md:text-left text-[15px]">
@@ -41,7 +41,7 @@ const Footer = () => {
         {/* Contact and Social Media Section */}
         <div className="flex flex-col ">
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mb-4">
-            <a href="tel:+919952311408" className="hover:text-gray-300 flex items-center"> <IoMdCall className="text-green-500 mr-2" />+91 99523 11408</a>
+            <a href="tel:+919952311408" className="hover:text-gray-300 flex items-center"> <IoMdCall className="text-green-500 mr-2" />+91 8056701528</a>
             <a href="mailto:contact@emblock.in" className="hover:text-gray-300">✉ contact@emblock.in</a>
           </div>
           <div className="flex flex-row space-x-4 md:space-x-6 items-center ">
@@ -203,7 +203,7 @@ const Footer = () => {
 
                   <h2>8. Contact Us</h2>
                   <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-                  <p>[23 a ramadoss salai nehru nagar neyveli Cuddalore-607308, Ph: +91 99523 11408]</p>
+                  <p>[23 a ramadoss salai nehru nagar neyveli Cuddalore-607308, Ph: +91 8056701528]</p>
 
                 </ul>
 

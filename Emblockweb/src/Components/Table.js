@@ -21,8 +21,8 @@ const Table = () => {
     }, []);
 
     return (
-        <div className="bg-gray-900 container mx-auto p-4 mt-6">
-            <h1 className="text-2xl font-bold mb-4">Registered Students</h1>
+        <div className="bg-black container mx-auto p-4 mt-6">
+            <h1 className="text-xl font-bold mb-4">Registered Students</h1>
             <table className="min-w-full border border-gray-200 shadow-md">
                 <thead>
                     <tr className="text-left">

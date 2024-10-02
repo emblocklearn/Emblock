@@ -27,7 +27,7 @@ const OfferSection = ({ offerItems = [] }) => {
 
       <div className={`flex flex-col items-center gap-4 px-6 py-12 md:px-16 bg-black ${showUiUxDesign ? 'blur-sm' : ''}  `}>
         <h2 className="text-[24px] text-white md:text-[40px] font-bold text-gray-900 mb-8 lg:mb-12 text-center">
-          What we offer?
+        Enroll for Courses now, Check what we offer
         </h2>
         <div className="w-full p-2  bg-white grid grid-cols-1 gap-6 md:grid-cols-2 md:w-2/3 md:p-6">
           {Array.isArray(offerItems) && offerItems.length > 0 ? (
