@@ -14,6 +14,7 @@ import FaqSection from './Components/FaqSection';
 import Table from './Components/Table';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {offerItems} from './Components/Data'
+import Steps from './Components/Steps';
 
 
 function App() {
@@ -31,7 +32,8 @@ function App() {
 
                 <ComingSoon />
                 <WhyEmblock />
-                <div id='offer'>
+                <Steps/>
+                <div id='offer' className='bg-gray-100 mt-6'>
                 <OfferSection offerItems={offerItems } />
                 </div>
                 <div className='bg-gray-100 mt-6'>  

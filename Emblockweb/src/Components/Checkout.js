@@ -1,6 +1,5 @@
 import { React, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import jsPDF from 'jspdf';
 import embeddedSystemsImage from '../assets/backendimg.png'; // Ensure the image path is correct4
 import html2pdf from 'html2pdf.js';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';

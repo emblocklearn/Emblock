@@ -56,7 +56,38 @@ export const offerItems = [
   },
 ];
 
-
+export const steps = [
+  {
+    id: 1,
+    title: 'Registration',
+    description:
+      'Kickstart your learning journey by signing up for the 10-day EmBlock workshop.',
+  },
+  {
+    id: 2,
+    title: 'Group Workshop Participation',
+    description:
+      'Participants will be divided into groups to collaborate and work on tasks during the live 10-day workshops, gaining insights from industry experts and peers.',
+  },
+  {
+    id: 3,
+    title: 'Real-Time Project Submission',
+    description:
+      'At the end of the workshop, you’ll submit a group project for assessment, showcasing your skills and knowledge in a real-world scenario.',
+  },
+  {
+    id: 4,
+    title: 'Internship Opportunity',
+    description:
+      'After successfully completing the 10-day workshop, you’ll have the chance to participate in an internship, where you’ll work on real-time projects and gain hands-on industry experience.',
+  },
+  {
+    id: 5,
+    title: 'Placement & Partner Opportunities',
+    description:
+      'Take advantage of our placement services and explore career opportunities with our partner companies, helping you take the next step in your career.',
+  },
+];
 
 
 
