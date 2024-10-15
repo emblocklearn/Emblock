@@ -1,12 +1,11 @@
-import { React, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import embeddedSystemsImage from '../assets/backendimg.png'; // Ensure the image path is correct4
-import html2pdf from 'html2pdf.js';
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { React, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import embeddedSystemsImage from "../assets/backendimg.png"; // Ensure the image path is correct4
+import html2pdf from "html2pdf.js";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db } from '../firebase';
-import ClipLoader from 'react-spinners/ClipLoader';
-
+import { storage, db } from "../firebase";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -14,16 +13,16 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [openModal, setOpenModal] = useState(null);
-  const { name, email, title, docId } = location.state || {}; 
+  const { name, email, title, docId } = location.state || {};
   console.log("name", name, email, title, docId);
 
   const handleCloseClick = () => {
-    navigate('/frontend-form');
+    navigate("/frontend-form");
   };
 
   const loadRazorpay = (src) => {
     return new Promise((resolve) => {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = src;
       script.onload = () => resolve(true);
       script.onerror = () => resolve(false);
@@ -62,7 +61,9 @@ const Checkout = () => {
           <div class="px-6 py-2  text-center">
             <h2 class="text-xl text-black font-semibold">Hey ${name}!</h2>
             <p class="text-sm text-gray-500">Thank you for being a part of Emblock Learn</p>
-            <h3 class="text-lg text-black font-bold mt-4">Invoice Number: ${response.razorpay_order_id}</h3>
+            <h3 class="text-lg text-black font-bold mt-4">Invoice Number: ${
+              response.razorpay_order_id
+            }</h3>
           </div>
 
           <div class="px-6 py-4 border-t-2 border-dashed border-gray-600">
@@ -105,7 +106,9 @@ const Checkout = () => {
             <div class="border-t-2 border-dashed border-gray-600 mt-2"></div>
 
             <div class="flex justify-end mt-4 font-semibold">
-              <p>Total: class="text-gray-500" <span class="text-black font-bold ml-4">${amount / 100} INR</span></p>
+              <p>Total: class="text-gray-500" <span class="text-black font-bold ml-4">${
+                amount / 100
+              } INR</span></p>
             </div>
 
             <div class="border-b-2 border-dashed border-gray-600 mt-4"></div>
@@ -138,17 +141,20 @@ const Checkout = () => {
     `;
 
       // Convert HTML to PDF
-      const element = document.createElement('div');
+      const element = document.createElement("div");
       element.innerHTML = invoiceHtml;
 
-      const pdfBlob = await html2pdf().from(element).outputPdf('blob');
-      const pdfRef = ref(storage, `invoices/${email + response.razorpay_order_id}.pdf`);
+      const pdfBlob = await html2pdf().from(element).outputPdf("blob");
+      const pdfRef = ref(
+        storage,
+        `invoices/${email + response.razorpay_order_id}.pdf`
+      );
       await uploadBytes(pdfRef, pdfBlob);
       const pdfUrl = await getDownloadURL(pdfRef);
 
       return pdfUrl;
     } catch (error) {
-      console.error('Error generating or uploading invoice:', error);
+      console.error("Error generating or uploading invoice:", error);
       throw error;
     } finally {
       setLoading(false); // Hide spinner
@@ -156,7 +162,7 @@ const Checkout = () => {
   };
 
   const updatePaymentDetails = async (docId, response, amount, invoiceUrl) => {
-    const userDocRef = doc(db, 'Users', docId); // Use docId to locate the document
+    const userDocRef = doc(db, "Users", docId); // Use docId to locate the document
 
     // Payment details to be added
     const paymentDetails = {
@@ -168,14 +174,13 @@ const Checkout = () => {
 
     try {
       await updateDoc(userDocRef, {
-        paymentDetails: [paymentDetails]
+        paymentDetails: [paymentDetails],
       });
-      console.log('Payment details updated successfully');
+      console.log("Payment details updated successfully");
     } catch (error) {
-      console.error('Error updating payment details:', error);
+      console.error("Error updating payment details:", error);
     }
   };
-
 
   const handlePayment = async () => {
     setLoading(true);
@@ -185,22 +190,23 @@ const Checkout = () => {
       return;
     }
 
-
     const { name, email, title, docId } = location.state || {}; // Extract docId from state
 
-    const res = await loadRazorpay('https://checkout.razorpay.com/v1/checkout.js');
+    const res = await loadRazorpay(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
 
     if (!res) {
-      alert('Razorpay SDK failed to load. Are you online?');
+      alert("Razorpay SDK failed to load. Are you online?");
       setLoading(false); // Hide spinner
       return;
     }
 
     try {
-      const data = await fetch('https://emblocklearn.vercel.app/create-order', {
-        method: 'POST',
+      const data = await fetch("https://emblocklearn.vercel.app/create-order", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ amount: 1180 }),
       });
@@ -216,23 +222,27 @@ const Checkout = () => {
         key: process.env.REACT_APP_RAZORPAY_KEY_ID,
         amount: jsonData.order.amount,
         currency: jsonData.order.currency,
-        name: 'Emblock Learn',
-        description: 'Test Transaction',
-        image: 'https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/assests%2Femblocklogo.png?alt=media&token=e2fd552b-7338-460d-ba8f-1634177267a7',
+        name: "Emblock Learn",
+        description: "Test Transaction",
+        image:
+          "https://firebasestorage.googleapis.com/v0/b/project-emblock.appspot.com/o/assests%2Femblocklogo.png?alt=media&token=e2fd552b-7338-460d-ba8f-1634177267a7",
         order_id: jsonData.order.id,
         handler: async function (response) {
-          console.log(response); 
+          console.log(response);
           try {
-            const verifyResponse = await fetch('https://emblocklearn.vercel.app/verify-payment', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-                email: email,
-              }),
-            });
+            const verifyResponse = await fetch(
+              "https://emblocklearn.vercel.app/verify-payment",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                  email: email,
+                }),
+              }
+            );
 
             if (!verifyResponse.ok) {
               throw new Error(`Server error: ${verifyResponse.statusText}`);
@@ -241,39 +251,47 @@ const Checkout = () => {
             const verifyData = await verifyResponse.json();
 
             if (verifyData.success) {
-              const invoiceUrl = await generateInvoice(response, jsonData.order.amount);
-              await updatePaymentDetails(docId, response, jsonData.order.amount, invoiceUrl);
-              console.log('payment url', invoiceUrl);
-              const newTab = window.open(invoiceUrl, '_blank'); // Updated line
+              const invoiceUrl = await generateInvoice(
+                response,
+                jsonData.order.amount
+              );
+              await updatePaymentDetails(
+                docId,
+                response,
+                jsonData.order.amount,
+                invoiceUrl
+              );
+              console.log("payment url", invoiceUrl);
+              const newTab = window.open(invoiceUrl, "_blank"); // Updated line
               if (newTab) {
                 newTab.focus(); // Focus on the new tab
               } else {
-                alert('Please allow popups for this website'); // Alert if popup is blocked
+                alert("Please allow popups for this website"); // Alert if popup is blocked
               }
-              navigate('/'); // Redirect to home page
-              alert('Payment Successful and Invoice Generated!');
+              navigate("/"); // Redirect to home page
+              alert("Payment Successful and Invoice Generated!");
             } else {
-              alert('Payment verification failed.');
+              alert("Payment verification failed.");
             }
           } catch (error) {
-            console.error('Error verifying payment:', error);
-            alert('Payment verification error.');
+            console.error("Error verifying payment:", error);
+            alert("Payment verification error.");
           }
         },
         prefill: {
           name: name,
           email: email,
-          contact: '9999999999',
+          contact: "9999999999",
         },
         notes: {
-          address: 'Corporate Office',
+          address: "Corporate Office",
         },
         theme: {
-          color: '#F37254',
+          color: "#F37254",
         },
         modal: {
           ondismiss: function () {
-            console.log('Payment modal closed');
+            console.log("Payment modal closed");
           },
         },
       };
@@ -281,37 +299,30 @@ const Checkout = () => {
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     } catch (error) {
-      console.error('Error during payment:', error);
-      alert('Payment processing error.');
-
-    }
-    finally {
+      console.error("Error during payment:", error);
+      alert("Payment processing error.");
+    } finally {
       setLoading(false);
     }
   };
 
-
   const handleOpenModal = () => setOpenModal("terms");
   const handleCloseModal = () => setOpenModal(null);
 
-
-
-
-
-
-
-
-
   return (
     <div className="bg-gray-100 p-4 md:p-10">
-      <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 ${loading ? '' : 'hidden'}`}>
-      
-          <ClipLoader color="#22c55e" size={70} loading={loading} />
-      
+      <div
+        className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 ${
+          loading ? "" : "hidden"
+        }`}
+      >
+        <ClipLoader color="#22c55e" size={70} loading={loading} />
       </div>
       <div className="max-w-full md:max-w-6xl mx-auto bg-white text-black shadow-lg rounded-lg overflow-hidden">
         <div className="flex flex-row md:flex-row items-center justify-between p-[10px] md:p-6 border-b border-gray-200">
-          <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Checkout</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0">
+            Checkout
+          </h1>
           <button
             onClick={handleCloseClick}
             className="bg-green-500 w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center hover:bg-green-700"
@@ -320,7 +331,9 @@ const Checkout = () => {
           </button>
         </div>
         <div className="p-4 md:p-6">
-          <h2 className="text-xl md:text-2xl font-bold text-[#28b463] mb-4">{title}</h2>
+          <h2 className="text-xl md:text-2xl font-bold text-[#28b463] mb-4">
+            {title}
+          </h2>
           <div className="flex flex-col md:flex-row items-center">
             <img
               src={embeddedSystemsImage}
@@ -328,18 +341,26 @@ const Checkout = () => {
               className="w-[14rem] h-[10rem] md:w-32 md:h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
             />
             <div className="flex-1">
-              <h3 className="text-xl md:text-2xl font-bold mb-4">This internship includes</h3>
+              <h3 className="text-xl md:text-2xl font-bold mb-4">
+                This internship includes
+              </h3>
               <div className="flex flex-col md:flex-row md:flex-wrap">
                 <div className="flex items-center mb-4 md:w-1/2">
                   <i className="fas fa-chalkboard-teacher text-lg md:text-xl mr-2"></i>
                   <span>Mentorship by Industry Experts</span>
                 </div>
                 <div className="flex items-center mb-4 md:w-1/2">
-                  <i className="fa fa-users text-lg md:text-xl mr-2" aria-hidden="true"></i>
+                  <i
+                    className="fa fa-users text-lg md:text-xl mr-2"
+                    aria-hidden="true"
+                  ></i>
                   <span>Real-Time working exposure</span>
                 </div>
                 <div className="flex items-center mb-4 md:w-1/2">
-                  <i className="fa fa-trophy text-lg md:text-xl mr-2" aria-hidden="true"></i>
+                  <i
+                    className="fa fa-trophy text-lg md:text-xl mr-2"
+                    aria-hidden="true"
+                  ></i>
                   <span>Certificate of Completion</span>
                 </div>
                 <div className="flex items-center mb-4 md:w-1/2">
@@ -351,7 +372,10 @@ const Checkout = () => {
 
             <div className="relative flex flex-col items-end mt-4 md:mt-0 md:pl-6">
               <div className="absolute left-0 top-0 h-full w-0.5 bg-dashed bg-gray-400 hidden md:block"></div>
-              <p className="text-lg md:text-xl font-semibold">Total Price<i className="fas fa-chevron-down text-sm md:text-base p-1"></i></p>
+              <p className="text-lg md:text-xl font-semibold">
+                Total Price
+                <i className="fas fa-chevron-down text-sm md:text-base p-1"></i>
+              </p>
               <p className="text-xl md:text-3xl font-bold mr-[32px]">₹1180</p>
             </div>
           </div>
@@ -372,62 +396,187 @@ const Checkout = () => {
                 >
                   Close
                 </button>
-                <div className="mx-4 bg-white border border-4 border-green-500 text-black px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
-                
-                  
+                <div className="mx-4 bg-white border-4 border-green-500 text-black px-4 md:px-12 py-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto md:w-1/2">
+                  <h1 className="text-[12px] text-center font-extrabold">
+                    Terms and Conditions for EmBlock Workshop
+                  </h1>
+                  <div className="mb-4">
+                    <p class="notice">
+                      <strong>
+                        This document is an electronic record in terms of the
+                        Information Technology Act, 2000 and relevant
+                        amendments. It does not require physical or digital
+                        signatures.
+                      </strong>
+                    </p>
+                    <ul className="list-disc pl-5 flex flex-col items-start">
+                      <li>
+                        <strong>
+                          Published in accordance with Rule 3(1) of the
+                          Information Technology (Intermediaries Guidelines)
+                          Rules, 2011, which requires publishing the rules and
+                          regulations, privacy policy, and Terms of Use for the
+                          domain emblock.in ("Website"), including mobile site
+                          and mobile application ("Platform").
+                        </strong>
+                      </li>
 
-                <h1 className="text-[12px] text-center font-extrabold">Terms and Conditions for EmBlock Workshop</h1>
-              <div className="mb-4" >
-              <p class="notice"><strong>This document is an electronic record in terms of the Information Technology Act, 2000 and relevant amendments. It does not require physical or digital signatures.</strong></p>
-                <ul className="list-disc pl-5 flex flex-col items-start" >
+                      <li>
+                        <strong>
+                          The Platform is owned by EmBlock, with its registered
+                          office at [23 a ramadoss salai nehru nagar neyveli
+                          Cuddalore-607308] (referred to as "EmBlock", "we",
+                          "us", "our").
+                        </strong>
+                      </li>
 
-              
+                      <li>
+                        <strong>
+                          Your use of the Platform and its services, including
+                          the workshop, are governed by the following terms and
+                          conditions ("Terms of Use"). By using the Platform or
+                          registering for the workshop, you contract with
+                          EmBlock, and these terms constitute your binding
+                          obligations.
+                        </strong>
+                      </li>
 
-                
+                      <li class="highlight">
+                        <strong>
+                          The workshop fee is 1000 INR and is strictly
+                          non-refundable. No cancellations are allowed under any
+                          circumstances. By registering for the workshop, you
+                          acknowledge and agree to this no-refund,
+                          no-cancellation policy.
+                        </strong>
+                      </li>
 
-                  <li><strong>Published in accordance with Rule 3(1) of the Information Technology (Intermediaries Guidelines) Rules, 2011, which requires publishing the rules and regulations, privacy policy, and Terms of Use for the domain emblock.in ("Website"), including mobile site and mobile application ("Platform").</strong></li>
+                      <li>
+                        <strong>
+                          These Terms of Use relate to your use of our website
+                          and workshop services (collectively, "Services"). Any
+                          terms proposed by you that conflict with these Terms
+                          are expressly rejected.
+                        </strong>
+                      </li>
 
-                  <li><strong>The Platform is owned by EmBlock, with its registered office at [23 a ramadoss salai nehru nagar neyveli Cuddalore-607308] (referred to as "EmBlock", "we", "us", "our").</strong></li>
+                      <li>
+                        <strong>
+                          These Terms can be modified at any time without
+                          notice. It is your responsibility to periodically
+                          review them to stay informed of updates.
+                        </strong>
+                      </li>
 
-                  <li><strong>Your use of the Platform and its services, including the workshop, are governed by the following terms and conditions ("Terms of Use"). By using the Platform or registering for the workshop, you contract with EmBlock, and these terms constitute your binding obligations.</strong></li>
+                      <li>
+                        <strong>
+                          "You", "your", or "user" refers to any natural or
+                          legal person who has agreed to use the Platform or
+                          register for the workshop.
+                        </strong>
+                      </li>
 
-                  <li class="highlight"><strong>The workshop fee is 1000 INR and is strictly non-refundable. No cancellations are allowed under any circumstances. By registering for the workshop, you acknowledge and agree to this no-refund, no-cancellation policy.</strong></li>
+                      <li>
+                        <strong>
+                          ACCESSING, BROWSING, OR USING THE PLATFORM, OR
+                          REGISTERING FOR THE WORKSHOP INDICATES YOUR AGREEMENT
+                          TO THESE TERMS, SO PLEASE READ CAREFULLY BEFORE
+                          PROCEEDING.
+                        </strong>
+                      </li>
 
-                  <li><strong>These Terms of Use relate to your use of our website and workshop services (collectively, "Services"). Any terms proposed by you that conflict with these Terms are expressly rejected.</strong></li>
+                      <li>
+                        <strong>
+                          You agree to provide accurate information during
+                          registration and are responsible for all actions done
+                          through your registered account on the Platform.
+                        </strong>
+                      </li>
 
-                  <li><strong>These Terms can be modified at any time without notice. It is your responsibility to periodically review them to stay informed of updates.</strong></li>
+                      <li>
+                        <strong>
+                          Your use of the Services is at your own risk, and we
+                          shall not be liable for any consequences.
+                        </strong>
+                      </li>
 
-                  <li><strong>"You", "your", or "user" refers to any natural or legal person who has agreed to use the Platform or register for the workshop.</strong></li>
+                      <li>
+                        <strong>
+                          The contents of the Platform, Services, and workshop
+                          materials are proprietary to EmBlock. You do not hold
+                          any intellectual property rights to the content.
+                        </strong>
+                      </li>
 
-                  <li><strong>ACCESSING, BROWSING, OR USING THE PLATFORM, OR REGISTERING FOR THE WORKSHOP INDICATES YOUR AGREEMENT TO THESE TERMS, SO PLEASE READ CAREFULLY BEFORE PROCEEDING.</strong></li>
+                      <li>
+                        <strong>
+                          Unauthorized use of the Platform, Services, or
+                          workshop materials may result in action against you as
+                          per these Terms or applicable laws.
+                        </strong>
+                      </li>
 
-                  <li><strong>You agree to provide accurate information during registration and are responsible for all actions done through your registered account on the Platform.</strong></li>
+                      <li>
+                        <strong>
+                          You agree to pay for the workshop and not use the
+                          Platform for any unlawful or illegal purposes.
+                        </strong>
+                      </li>
 
-                  <li><strong>Your use of the Services is at your own risk, and we shall not be liable for any consequences.</strong></li>
+                      <li>
+                        <strong>
+                          When registering for the workshop on the Platform, you
+                          are entering into a legally binding contract with
+                          EmBlock.
+                        </strong>
+                      </li>
 
-                  <li><strong>The contents of the Platform, Services, and workshop materials are proprietary to EmBlock. You do not hold any intellectual property rights to the content.</strong></li>
+                      <li>
+                        <strong>
+                          You agree to indemnify and hold EmBlock harmless from
+                          any third-party claims due to your breach of these
+                          Terms.
+                        </strong>
+                      </li>
 
-                  <li><strong>Unauthorized use of the Platform, Services, or workshop materials may result in action against you as per these Terms or applicable laws.</strong></li>
+                      <li>
+                        <strong>
+                          EmBlock will not be liable for any indirect,
+                          consequential, or punitive damages arising from your
+                          use of the Services or participation in the workshop.
+                        </strong>
+                      </li>
 
-                  <li><strong>You agree to pay for the workshop and not use the Platform for any unlawful or illegal purposes.</strong></li>
+                      <li>
+                        <strong>
+                          Liability will not exceed the amount paid by you for
+                          the workshop or Rs. 100, whichever is less.
+                        </strong>
+                      </li>
 
-                  <li><strong>When registering for the workshop on the Platform, you are entering into a legally binding contract with EmBlock.</strong></li>
+                      <li>
+                        <strong>
+                          Performance of obligations may be delayed or prevented
+                          by a force majeure event.
+                        </strong>
+                      </li>
 
-                  <li><strong>You agree to indemnify and hold EmBlock harmless from any third-party claims due to your breach of these Terms.</strong></li>
+                      <li>
+                        <strong>
+                          These Terms are governed by the laws of India, and
+                          disputes will be subject to the jurisdiction of courts
+                          in [Cuddalore, TamilNadu].
+                        </strong>
+                      </li>
 
-                  <li><strong>EmBlock will not be liable for any indirect, consequential, or punitive damages arising from your use of the Services or participation in the workshop.</strong></li>
-
-                  <li><strong>Liability will not exceed the amount paid by you for the workshop or Rs. 100, whichever is less.</strong></li>
-
-                  <li><strong>Performance of obligations may be delayed or prevented by a force majeure event.</strong></li>
-
-                  <li><strong>These Terms are governed by the laws of India, and disputes will be subject to the jurisdiction of courts in [Cuddalore, TamilNadu].</strong></li>
-
-                  <li><strong>Concerns regarding these Terms must be communicated using the contact information provided on the website.</strong></li>
-
-                </ul>
-              </div>
-
+                      <li>
+                        <strong>
+                          Concerns regarding these Terms must be communicated
+                          using the contact information provided on the website.
+                        </strong>
+                      </li>
+                    </ul>
+                  </div>
 
                   <div className="flex items-center mt-4">
                     <input
@@ -458,7 +607,6 @@ const Checkout = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
